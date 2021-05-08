@@ -28,6 +28,11 @@ public class Pilha<valorGenerico> implements Cloneable// Classe Pilha que pode r
         this.topo = -1;
     }
 
+    /**
+     * Instancia uma pilha idêntica à pilha modelo.
+     * @param modelo pilha modelo.
+     * @throws Exception retorna erro caso o modelo seja nulo.
+     */
     public Pilha(Pilha<valorGenerico> modelo) throws Exception {
         if (modelo == null)
             throw new Exception("Modelo para clonar ausente");
@@ -116,18 +121,24 @@ public class Pilha<valorGenerico> implements Cloneable// Classe Pilha que pode r
         return this.topo == -1;
     }
 
+    /**
+     * Verifica se a pilha modelo é igual à pilha instânciada.
+     * 
+     * @param modelo pilha modelo.
+     * @return Retorna true se for igual e false se não.
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(Object modelo) {
+        if (this == modelo)
             return true;
 
-        if (obj == null)
+        if (modelo == null)
             return false;
 
-        if (this.getClass() != obj.getClass())
+        if (this.getClass() != modelo.getClass())
             return false;
 
-        Pilha<valorGenerico> pAux = (Pilha<valorGenerico>) obj;
+        Pilha<valorGenerico> pAux = (Pilha<valorGenerico>) modelo;
 
         if (this.topo != pAux.topo)
             return false;
@@ -139,10 +150,14 @@ public class Pilha<valorGenerico> implements Cloneable// Classe Pilha que pode r
             if (!this.elemento[i].equals(pAux.elemento[i]))
                 return false;
         }
-
         return true;
     }
 
+    /**
+     * Gera o hashcode da pilha instânciada.
+     * 
+     * @return Retorna o hashcode da pilha instânciada.
+     */
     @Override
     public int hashCode() {
         int ret = 666;
@@ -161,6 +176,11 @@ public class Pilha<valorGenerico> implements Cloneable// Classe Pilha que pode r
         return ret;
     }
 
+    /**
+     * Imprime informações sobre a pilha.
+     * 
+     * @return Retorna uma String que mostra quantos elementos estão presentes na pilha e qual elemento está no topo da pilha.
+     */
     @Override
     public String toString() {
         String ret;
@@ -176,6 +196,11 @@ public class Pilha<valorGenerico> implements Cloneable// Classe Pilha que pode r
         return ret;
     }
 
+    /**
+     * Cria uma cópia da pilha instânciada.
+     * 
+     * @return Retorna uma pilha igual à pilha instânciada.
+     */
     public Object clone() {
         Pilha<valorGenerico> ret = null;
 
