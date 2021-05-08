@@ -1,4 +1,5 @@
 package EstruturasDeDados;
+
 /**
  * A classe Pilha é destinada a criação de pilhas padrão.
  *
@@ -6,7 +7,7 @@ package EstruturasDeDados;
  * feita.
  */
 
-public class Pilha<valorGenerico> // Classe Pilha que pode receber qualquer tipo de valor
+public class Pilha<valorGenerico> implements Cloneable// Classe Pilha que pode receber qualquer tipo de valor
 {
     private Object[] elemento;
     private int topo;
@@ -27,6 +28,17 @@ public class Pilha<valorGenerico> // Classe Pilha que pode receber qualquer tipo
         this.topo = -1;
     }
 
+    public Pilha(Pilha<valorGenerico> modelo) throws Exception {
+        if (modelo == null)
+            throw new Exception("Modelo para clonar ausente");
+        this.elemento = new Object[modelo.elemento.length];
+        this.topo = modelo.topo;
+
+        for (int i = 0; i < modelo.elemento.length; i++) {
+            this.elemento[i] = modelo.elemento[i];
+        }
+    }
+
     /**
      * Insere um novo valor a Pilha
      * 
@@ -42,7 +54,11 @@ public class Pilha<valorGenerico> // Classe Pilha que pode receber qualquer tipo
             throw new Exception("Pilha esta cheia");
 
         this.topo++;
-        this.elemento[this.topo] = valor;
+        if (valor instanceof Cloneable) {
+            Clonador<valorGenerico> clonador = new Clonador<valorGenerico>();
+            this.elemento[this.topo] = clonador.clone(valor);
+        } else
+            this.elemento[this.topo] = valor;
     }
 
     /**
@@ -55,8 +71,12 @@ public class Pilha<valorGenerico> // Classe Pilha que pode receber qualquer tipo
         if (this.topo == -1)
             throw new Exception("Pilha vazia");
 
-        this.topo--;
-        return (valorGenerico) this.elemento[this.topo];
+        if (this.elemento[this.topo] instanceof Cloneable) {
+            Clonador<valorGenerico> clonador = new Clonador<valorGenerico>();
+            return clonador.clone((valorGenerico) this.elemento[this.topo]);
+        } else {
+            return (valorGenerico) this.elemento[this.topo];
+        }
     }
 
     /**
@@ -72,9 +92,14 @@ public class Pilha<valorGenerico> // Classe Pilha que pode receber qualquer tipo
         Object aux = this.elemento[this.topo];
         this.elemento[this.topo] = null;
         this.topo--;
-        return (valorGenerico) aux;
+        if (aux instanceof Cloneable) {
+            Clonador<valorGenerico> clonador = new Clonador<valorGenerico>();
+            return clonador.clone((valorGenerico) aux);
+        } else {
+            return (valorGenerico) aux;
+        }
     }
-    
+
     /**
      * Verifica se a Pilha está cheia, retornando um valor booleano true, caso a
      * Pilha esteja cheia, ou false, caso contrário.
@@ -147,6 +172,17 @@ public class Pilha<valorGenerico> // Classe Pilha que pode receber qualquer tipo
 
         if (this.topo != -1)
             ret += ", sendo o ultimo " + this.elemento[this.topo];
+
+        return ret;
+    }
+
+    public Object clone() {
+        Pilha<valorGenerico> ret = null;
+
+        try {
+            ret = new Pilha<valorGenerico>(this);
+        } catch (Exception erro) {
+        }
 
         return ret;
     }
