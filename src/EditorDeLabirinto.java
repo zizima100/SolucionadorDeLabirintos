@@ -8,7 +8,7 @@ import java.io.FileWriter;
 /**
  * UI do projeto.
  */
-public class Janela {
+public class EditorDeLabirinto {
     JFrame janela = new JFrame("Editor de Labirintos");
     JButton botao[] = new JButton[5]; // criamos 5 botoes
     JTextArea visorErros = new JTextArea(); // text area para visor de error
@@ -18,7 +18,7 @@ public class Janela {
      * metódo responsável em criar a janela, deixá-la centralizada, criar os botões, determinar suas caracteristicas estéticas 
      * e propriedades funcionais.
      */
-    public Janela() {
+    public EditorDeLabirinto() {
         JPanel botoes = new JPanel(); // jpanel recebe varios componentes layoutManager
         botoes.setLayout(new GridLayout(1, 5)); // criamos os icones de botao 
         String textosBotoes[] = { "Novo", "Importar", "Validar", "Solucionar", "Salvar" }; 
