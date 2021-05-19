@@ -5,7 +5,7 @@ import bd.daos.*;
 
 public class BDSQLServer
 {
-    public static final MeuPreparedStatement COMANDO;
+    public static final MeuPreparedStatement COMANDO; // Constante Comando, de MeuPreparedStatement
 
     static
     {
