@@ -1,4 +1,5 @@
-import EstruturasDeDados.*;
+package App;
+import App.EstruturasDeDados.*;
 
 /**
  * A Classe Solucionador recebe um labirinto e possibilita solucioná-lo.

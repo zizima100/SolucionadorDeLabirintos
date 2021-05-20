@@ -1,3 +1,4 @@
+package App;
 public class ValidacaoInterface {
     private Integer linhas;
     private Integer colunas;

@@ -1,4 +1,4 @@
-package EstruturasDeDados;
+package App.EstruturasDeDados;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

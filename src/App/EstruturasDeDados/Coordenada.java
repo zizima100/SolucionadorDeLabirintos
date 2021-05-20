@@ -1,4 +1,4 @@
-package EstruturasDeDados;
+package App.EstruturasDeDados;
 
 /**
  * A classe coordenada guarda um vetor de inteiros com 2 elementos.
@@ -8,7 +8,7 @@ package EstruturasDeDados;
  * <p>
  */
 
-public class Coordenada implements Cloneable{
+public class Coordenada implements Cloneable {
     private Integer[] elementos = new Integer[2];
 
     /**

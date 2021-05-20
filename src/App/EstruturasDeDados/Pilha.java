@@ -1,4 +1,4 @@
-package EstruturasDeDados;
+package App.EstruturasDeDados;
 
 /**
  * A classe Pilha é destinada a criação de pilhas padrão.

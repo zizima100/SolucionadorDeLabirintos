@@ -1,4 +1,4 @@
-package db.dbos;
+package BancoDeDados.dbos;
 
 import java.util.Calendar;
 
@@ -66,12 +66,12 @@ public class Labirinto implements Cloneable
         if (obj==null)
             return false;
 
-        if (!(obj instanceof Livro))
+        if (!(obj instanceof Labirinto))
             return false;
 
-        Livro liv = (Livro)obj;
+        Labirinto lab = (Labirinto)obj;
 
-        if (this.codigo!=liv.codigo)
+        if (this.indice!=lab.indice)
             return false;
 
         if (this.nome.equals(liv.nome))

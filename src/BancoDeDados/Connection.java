@@ -1,9 +1,9 @@
-package bd;
+package BancoDeDados;
 
-import bd.core.*;
-import bd.daos.*;
+import BancoDeDados.core.*;
+import BancoDeDados.daos.*;
 
-public class BDSQLServer
+public class Connection
 {
     public static final MeuPreparedStatement COMANDO; // Constante Comando, de MeuPreparedStatement
 
