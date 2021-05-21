@@ -1,4 +1,4 @@
-package ServidorDeLabirintos.Cliente;
+package ServidorDeLabirintos.Servidor;
 
 // Classe que deve estar presente tanto no cliente quanto no servidor.
 

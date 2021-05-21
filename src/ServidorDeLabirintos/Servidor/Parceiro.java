@@ -5,6 +5,8 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.Semaphore;
 
+// Classe que deve estar presente tanto no cliente quanto no servidor.
+
 /**
  * Quando usado nessa classe, o Parceiro representa um dos vários cliente conectados no server
  * (Pois estamos no servidor e quem é parceiro dele é o cliente).

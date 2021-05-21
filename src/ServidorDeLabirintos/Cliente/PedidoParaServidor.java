@@ -27,7 +27,7 @@ public class PedidoParaServidor {
     }    
 
     public String getLabirinto() {
-        return this.labirinto;
+        return this.labirinto; // Aqui não é melhor mandar o clone tbm? - Julio
     }
 
     public String toString ()

@@ -5,6 +5,8 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.Semaphore;
 
+// Classe que deve estar presente tanto no cliente quanto no servidor.
+
 /**
  * Quando usado nessa classe, o Parceiro representa o servidor (Pois estamos no cliente e quem é parceiro dele é o servidor).
  * OBS: Apenas um parceiro, que é o servidor
@@ -38,6 +40,7 @@ public class Parceiro
         this.transmissor = transmissor;
     }
 
+    // Meu parceiro recebe e meu programa envia.
     public void receba (Comunicado x) throws Exception
     {
         try
@@ -66,6 +69,7 @@ public class Parceiro
         }
     }
 
+    // Meu programa recebe e meu parceiro envia.
     public Comunicado envie () throws Exception
     {
         try
