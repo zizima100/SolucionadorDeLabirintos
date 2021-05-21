@@ -4,15 +4,15 @@ package ServidorDeLabirintos.Cliente;
  * Recebe a operação do cliente e envia o objeto (labirinto) do servidor para o cliente. 
  */
 public class PedidoParaServidor {
-    /**
-     * No caso do servidor de continhas, é mandado a operacao e o valor, mas no nosso programa, vamos 
-     * pedir opcoes do usuario: 
-     *  - Criar novo labirinto do zero -> Vai para a interface, ele é criado e depois deve ser salvo pelo novo botao "Salvar no Server"
-     *  - Abrir determinado labirinto, a partir do indice
-     *  - Alterar determinado labirinto, a partir do indice
-     *  
-     * Mandar o valor, que é o labirinto em forma de String.
-     */
+    
+    // No caso do servidor de continhas, é mandado a operacao e o valor, mas no nosso programa, vamos 
+    // pedir opcoes do usuario: 
+
+    //  - Criar novo labirinto do zero -> Vai para a interface, ele é criado e depois deve ser salvo pelo novo botao "Salvar no Server"
+    //  - Abrir determinado labirinto, a partir do indice
+    //  - Alterar determinado labirinto, a partir do indice
+      
+    //  Mandar o valor, que é o labirinto em forma de String.
 
     private char operacao; 
     private String labirinto; 
@@ -22,12 +22,18 @@ public class PedidoParaServidor {
         this.labirinto = labirinto; // melhor mandar o clone do labirinto já que é objeto  
     }
 
+    /**
+     * @return Retorna a operação presente no comunicado do pedido para o servidor.
+     */
     public char getOperacao() {
         return this.operacao;
     }    
 
+    /**
+     * @return Retorna o labirinto presente no comunicado do pedido para o servidor.
+     */
     public String getLabirinto() {
-        return this.labirinto; // Aqui não é melhor mandar o clone tbm? - Julio
+        return this.labirinto;
     }
 
     public String toString ()

@@ -3,6 +3,9 @@ package ServidorDeLabirintos.Cliente;
 import java.net.*;
 import java.io.*;
 
+/**
+ * Classe responsável por instanciar o cliente. Esse cliente é capaz de realizar operações ao se comunicar com o servidor e pode ser terminado por ordem do usuário ou por ordem do servidor.
+ */
 public class Cliente
 {
 	public static final String HOST_PADRAO  = "localhost";

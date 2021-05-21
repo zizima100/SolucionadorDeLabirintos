@@ -4,7 +4,10 @@ package ServidorDeLabirintos.Servidor;
 
 // Essa classe deve ser oca.
 
+/**
+ * Classe que armazena o comunicado de pedido para sair do cliente.
+ */
 public class PedidoParaSair extends Comunicado {
-    // Quando cliente digita comando de terminar programa
+    // Quando cliente digita comando de terminar programa.
     // Programa cliente -> Envia instancia dessa classe -> Servidor 
 }

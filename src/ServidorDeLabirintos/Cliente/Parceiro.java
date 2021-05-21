@@ -8,8 +8,7 @@ import java.util.concurrent.Semaphore;
 // Classe que deve estar presente tanto no cliente quanto no servidor.
 
 /**
- * Quando usado nessa classe, o Parceiro representa o servidor (Pois estamos no cliente e quem é parceiro dele é o servidor).
- * OBS: Apenas um parceiro, que é o servidor
+ * Classe que representa o parceiro com o qual o programa está conectado. Se o programa for o cliente, o parceiro será o servidor e vice-versa.
  */
 public class Parceiro
 {
@@ -40,7 +39,11 @@ public class Parceiro
         this.transmissor = transmissor;
     }
 
-    // Meu parceiro recebe e meu programa envia.
+    /**
+     * O parceiro do programa atual deve receber um comunicado que será enviado pelo programa.
+     * @param x o comunicado enviado pelo programa.
+     * @throws Exception Resulta em erros de transmissão, recepção e descone.
+     */
     public void receba (Comunicado x) throws Exception
     {
         try
@@ -69,7 +72,11 @@ public class Parceiro
         }
     }
 
-    // Meu programa recebe e meu parceiro envia.
+    /**
+     * O parceiro do programa atual deve enviar um comunicado que será recebido pelo programa.
+     * @return retorna o próximo comunicado como nulo (próximo comunicado foi enviado).
+     * @throws Exception Resulta em erros de recepção e desconexão.
+     */
     public Comunicado envie () throws Exception
     {
         try
@@ -85,6 +92,10 @@ public class Parceiro
         }
     }
 
+    /**
+     * Encerramento do programa atual.
+     * @throws Exception Resulta em erro de desconexão.
+     */
     public void adeus () throws Exception
     {
         try

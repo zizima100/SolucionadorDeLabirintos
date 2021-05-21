@@ -11,6 +11,9 @@ public class Resultado extends Comunicado {
         this.labirinto = labirinto; // Vamos guardar o valor recebido no atributo
     }
 
+    /**
+     * @return Retorna o labirinto armazenado no comunicado de resultado.
+     */
     public String getLabirinto () 
     {
         return this.labirinto;
