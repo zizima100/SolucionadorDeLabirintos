@@ -130,8 +130,8 @@ public class labirintos {
                 throw new Exception ("Labirinto não cadastrado");
 
             labirinto = new labirinto (resultado.getInt   ("INDICE"),
-                               resultado.getCalendar("DATA"),
-                               resultado.getString ("LABIRINTO"));
+                        resultado.getCalendar("DATA"),
+                        resultado.getString ("LABIRINTO"));
         }
         catch (SQLException erro)
         {

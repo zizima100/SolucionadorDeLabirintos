@@ -1,6 +1,9 @@
 package ServidorDeLabirintos.Cliente;
 
 import java.net.*;
+
+import App.EditorDeLabirinto;
+
 import java.io.*;
 
 /**
@@ -87,10 +90,23 @@ public class Cliente
 		
         tratadoraDeComunicadoDeDesligamento.start();
 
+		String email = "";
+		System.out.println("Digite o seu email: ");
+		try {
+			email = Teclado.getUmString().toLowerCase();
+		} catch (Exception e) {
+			System.err.println ("Opcao invalida!\n");
+			continue;
+		}
+
         char opcao=' ';
         do
         {
-            System.out.print ("Sua opcao (+, -, *, /, =, [T]erminar)? ");
+            System.out.println ("O que deseja fazer?");
+            System.out.println ("[ N ] - Criar um novo labirinto.");
+            System.out.println ("[ E ] - Editar um labirinto existente.");
+            System.out.println ("[ T ] - Terminar programa.");
+            System.out.println ("Opção: ");
 
             try
             {
@@ -102,7 +118,7 @@ public class Cliente
 				continue;
 			}
 
-			if ("+-*/=T".indexOf(opcao)==-1)
+			if ("NET".indexOf(opcao) == -1)
 		    {
 				System.err.println ("Opcao invalida!\n");
 				continue;
@@ -110,33 +126,57 @@ public class Cliente
 
 			try
 			{
-				double valor=0;
-				if ("+-*/".indexOf(opcao)!=-1)
+				if (opcao == 'N')
 				{
-					System.out.print ("Valor? ");
-					try
+					// Aqui é para abrir o editor de labirinto sem ter nenhum labirinto dentro. Acho que devemos remover o botão importar.
+					System.out.print ("Você selecionou a opção de criar um novo labirinto!");
+					try 
 					{
-						valor = Teclado.getUmDouble();
-						System.out.println();
-						
-						if (opcao=='/' && valor==0)
-						{
-							System.err.println ("Valor invalido!\n");
-							continue;
-						}
-					}
-					catch (Exception erro)
+						new EditorDeLabirinto();
+					} 
+					catch (Exception e) 
 					{
-						System.err.println ("Valor invalido!\n");
+						System.err.println(e.getMessage());
 						continue;
 					}
 
-
-					servidor.receba (new PedidoDeOperacao (opcao,valor));
+					// Enviamos um comunicado de pedido de salvamento de labirinto para o servidor.
+					// servidor.receba (new PedidoDeSalvamento (labirinto));
 				}
-				else if (opcao=='=')
+				else if (opcao == 'E')
 				{
-					servidor.receba (new PedidoDeResultado ());
+					int opcaoID = 0;
+					do 
+					{
+						System.out.println ("Os labirintos disponíveis são:");
+						// Printar todos os IDs + data de criação + data de edicao.
+						servidor.envie(new PedidoDeLabirintos(/*email*/));
+						Comunicado comunicado = null;
+						do {
+							
+						} while (!(comunicado instanceof Labirintos));
+
+
+						System.out.println ("Insira o valor do ID do labirinto que deseja editar.");
+						System.out.println ("ID: ");
+
+						try
+						{
+							opcaoID = Teclado.getUmInt();
+						}
+						catch (Exception erro)
+						{
+							System.err.println ("ID invalido!\n");
+							continue;
+						}
+
+						if (/*OpcaoID != numero de labirintos listados*/) {
+							System.err.println ("ID invalido!\n");
+						}
+
+					} while (/*opcaoID escolhida != dos listados*/); // Só da pra terminar a condição quando construir o print da lista de labirintos (precisa ter o número de itens).
+
+					servidor.receba (new PedidoDeLabirinto(id));
 					Comunicado comunicado = null;
 					do
 					{
