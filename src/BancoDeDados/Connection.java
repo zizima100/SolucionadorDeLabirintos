@@ -2,6 +2,10 @@ package BancoDeDados;
 
 import BancoDeDados.core.*;
 import BancoDeDados.daos.*;
+// import java.sql.DatabaseMetaData;
+// import java.sql.Connection;
+// import java.sql.DriverManager;
+// import java.sql.SQLException;
 
 public class Connection
 {
@@ -10,14 +14,18 @@ public class Connection
     static
     {
     	MeuPreparedStatement comando = null;
-
+        // Connection conn = null;
     	try
         {
             comando =
             new MeuPreparedStatement (
-            "com.microsoft.sqlserver.jdbc.SQLServerDriver",
-            "jdbc:sqlserver://DESKTOP-HGH6J95\\SQLEXPRESS:1433;databasename=ProjetoIntegrado",
-            "grupo", "0000");
+                "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+                "jdbc:sqlserver://jdvpic.database.windows.net;databasename=ProjetoIntegradoC",
+                "grupo", "jdvpic123!");
+                // String dbURL = "jdbc:sqlserver://localhost\\sqlexpress";
+                // String user = "sa";
+                // String pass = "secret";
+                // conn = DriverManager.getConnection(dbURL, user, pass);
         }
         catch (Exception erro)
         {

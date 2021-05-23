@@ -16,7 +16,7 @@ public class teste {
 
             MeuResultSet resultado = (MeuResultSet) Connection.COMANDO.executeQuery();
 
-            System.out.println(resultado.first());
+            System.out.println(resultado);
         } catch (SQLException erro) {
             erro.printStackTrace();
         }

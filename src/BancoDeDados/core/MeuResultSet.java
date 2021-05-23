@@ -37,7 +37,6 @@ public class MeuResultSet implements ResultSet
         this.resultado = r;
     }
 
-
     // metodos herdados da interface ResultSet
 
     public boolean absolute (int row) throws SQLException
