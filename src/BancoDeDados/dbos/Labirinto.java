@@ -1,6 +1,6 @@
 package BancoDeDados.dbos;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Labirinto implements Cloneable
 {
@@ -9,6 +9,15 @@ public class Labirinto implements Cloneable
     private String conteudo;
     private Date dataCriacao; 
     private Date dataEdicao;
+
+    public Labirinto (int id, String emailCliente, String conteudo, Date dataCriacao, Date dataEdicao) throws Exception
+    {
+        this.id = id;
+        this.emailCliente = emailCliente;
+        this.conteudo = conteudo;
+        this.dataCriacao = dataCriacao;
+        this.dataEdicao = dataEdicao;
+    }
 
     public Labirinto (String emailCliente, String conteudo, Date dataCriacao, Date dataEdicao) throws Exception
     {
@@ -23,6 +32,7 @@ public class Labirinto implements Cloneable
         if (clonado == null) {
             throw new Exception ("Labirinto a ser clonado está vazio");
         }
+        this.id = clonado.id;
         this.emailCliente = clonado.emailCliente;
         this.conteudo = clonado.conteudo;
         this.dataCriacao = clonado.dataCriacao;
@@ -32,6 +42,15 @@ public class Labirinto implements Cloneable
     public int getId () 
     {
         return this.id;
+    }
+
+    public void setEmail (String novoEmail)
+    {
+        this.emailCliente = novoEmail;
+    }
+
+    public String getEmail () {
+        return this.emailCliente;
     }
 
     public Date getDataCriacao () {
@@ -46,6 +65,11 @@ public class Labirinto implements Cloneable
         }
 
         this.dataEdicao = novaData;
+    }
+
+    public Date getDataEdicao () 
+    {
+        return this.dataEdicao;
     }
 
     public void setConteudo (String novoConteudo)

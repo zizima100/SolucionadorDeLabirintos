@@ -9,7 +9,9 @@ public class teste {
     public static void main(String[] args) {
 
         try {
-            System.out.println(Labirintos.cadastrado(3));
+            Labirinto teste = Labirintos.getLabirinto(3);
+            teste.setConteudo("###teste-alterado###");
+            Labirintos.alterar(teste);
         } catch (Exception erro) {
             System.err.println(erro.getMessage());
         }

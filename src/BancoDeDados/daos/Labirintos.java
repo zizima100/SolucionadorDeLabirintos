@@ -46,16 +46,18 @@ public class Labirintos {
             String sql;
 
             sql = "INSERT INTO LABIRINTOS " +
-                  "(INDICE,DATA,LABIRINTO) " +
+                  "(emailCliente,conteudo,dataCriacao, dataEdicao) " +
                   "VALUES " +
-                  "(?,?,?)";
+                  "(?,?,?,?)";
 
             BDSQLServer.COMANDO.prepareStatement (sql); // preparando tal comando (String sql)
 
             // Estamos substituindo as interogaçoes por valores de tipos especificos
-            BDSQLServer.COMANDO.setString (1, labirinto.getIndice ());
+            BDSQLServer.COMANDO.setString (1, labirinto.getEmail());
             // BDSQLServer.COMANDO.setData    (2, labirinto. ());
-            BDSQLServer.COMANDO.setString  (3, labirinto.getLabirinto ());
+            BDSQLServer.COMANDO.setString (2, labirinto.getConteudo());
+            BDSQLServer.COMANDO.setDate (3, labirinto.getDataCriacao());
+            BDSQLServer.COMANDO.setDate (4, labirinto.getDataEdicao());
 
             // Executamos os comandos de sql, insert e delete
             BDSQLServer.COMANDO.executeUpdate (); 
@@ -68,28 +70,28 @@ public class Labirintos {
         }
     }
 
-    public static void alterar (labirinto labirinto) throws Exception
+    public static void alterar (Labirinto labirinto) throws Exception
     {
         if (labirinto==null)
             throw new Exception ("Labirinto não fornecido");
 
-        if (!cadastrado (labirinto.getCodigo()))
+        if (!cadastrado (labirinto.getId()))
             throw new Exception ("Labirinto não cadastrado");
 
         try
         {
             String sql;
 
-            sql = "UPDATE LABIRINTOS " +
-                  "SET DATA=? " + // DEVE SER A NOVA DATA, A DATA ATUAL DA ATT
-                  "SET LABIRINTO=? " +
-                  "WHERE INDICE = ?";
+            sql = "UPDATE Labirintos " +
+                  "SET dataEdicao = ?, " + // DEVE SER A NOVA DATA, A DATA ATUAL DA ATT
+                  "conteudo = ? " +
+                  "WHERE id = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setString (1, labirinto.getData ());
-            BDSQLServer.COMANDO.setFloat  (2, labirinto.getLabirinto ());
-            BDSQLServer.COMANDO.setInt    (3, labirinto.getIndice ());
+            BDSQLServer.COMANDO.setDate (1, labirinto.getDataEdicao());
+            BDSQLServer.COMANDO.setString (2, labirinto.getConteudo());
+            BDSQLServer.COMANDO.setInt (3, labirinto.getId());
 
             BDSQLServer.COMANDO.executeUpdate ();
             BDSQLServer.COMANDO.commit        ();
@@ -108,7 +110,7 @@ public class Labirintos {
      * @return
      * @throws Exception
      */
-    public static Labirinto getLabirintos (int indice) throws Exception 
+    public static Labirinto getLabirinto (int id) throws Exception 
     {
         Labirinto labirinto = null; 
 
@@ -117,21 +119,19 @@ public class Labirintos {
             String sql;
 
             sql = "SELECT * " +
-                  "FROM LABIRINTOS " +
-                  "WHERE INDICE = ?";
+                  "FROM Labirintos " +
+                  "WHERE id = ?";
 
             BDSQLServer.COMANDO.prepareStatement (sql);
 
-            BDSQLServer.COMANDO.setInt (1, indice);
+            BDSQLServer.COMANDO.setInt (1, id);
 
             MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery (); // executeQuery para select e retorna objeto de meuResu
 
             if (!resultado.first()) // first é metodo de meuResultSet -> primeira linha do resultado
                 throw new Exception ("Labirinto não cadastrado");
 
-            labirinto = new labirinto (resultado.getInt   ("INDICE"),
-                        resultado.getCalendar("DATA"),
-                        resultado.getString ("LABIRINTO"));
+            labirinto = new Labirinto (resultado.getInt("id"), resultado.getString("emailCliente"), resultado.getString("conteudo"), resultado.getDate("dataCriacao"), resultado.getDate("dataEdicao"));
         }
         catch (SQLException erro)
         {
