@@ -7,18 +7,11 @@ import BancoDeDados.dbos.*;
 
 public class teste {
     public static void main(String[] args) {
+
         try {
-            String sql;
-
-            sql = "SELECT * " + "FROM Labirintos";
-
-            Connection.COMANDO.prepareStatement(sql);
-
-            MeuResultSet resultado = (MeuResultSet) Connection.COMANDO.executeQuery();
-
-            System.out.println(resultado);
-        } catch (SQLException erro) {
-            erro.printStackTrace();
+            System.out.println(Labirintos.cadastrado(3));
+        } catch (Exception erro) {
+            System.err.println(erro.getMessage());
         }
     }
 }

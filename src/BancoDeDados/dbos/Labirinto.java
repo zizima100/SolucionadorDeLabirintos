@@ -1,59 +1,72 @@
 package BancoDeDados.dbos;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class Labirinto implements Cloneable
 {
-    private int    indice;
-    private Calendar data; 
+    private int id;
+    private String emailCliente;
+    private String conteudo;
+    private Date dataCriacao; 
+    private Date dataEdicao;
 
-    // private Calendar dia = Calendar.DAY_OF_MONTH;
-    // private Calendar mes = Calendar.MONTH;
-    // private Calendar ano = Calendar.YEAR; 
+    public Labirinto (String emailCliente, String conteudo, Date dataCriacao, Date dataEdicao) throws Exception
+    {
+        this.emailCliente = emailCliente;
+        this.conteudo = conteudo;
+        this.dataCriacao = dataCriacao;
+        this.dataEdicao = dataEdicao;
+    }
 
-    // Calendar c = Calendar.getIntance();
+    public Labirinto (Labirinto clonado) throws Exception
+    {
+        if (clonado == null) {
+            throw new Exception ("Labirinto a ser clonado está vazio");
+        }
+        this.emailCliente = clonado.emailCliente;
+        this.conteudo = clonado.conteudo;
+        this.dataCriacao = clonado.dataCriacao;
+        this.dataEdicao = clonado.dataEdicao;
+    }
     
-    public void setIndice (int indice) throws Exception
+    public int getId () 
     {
-        if (indice <= 0)
-            throw new Exception ("indice invalido");
-
-        this.indice = indice;
-    }   
-
-    public int getIndice () 
-    {
-        return this.indice;
+        return this.id;
     }
 
-    public Calendar getData () {
-        return this.data;
+    public Date getDataCriacao () {
+        return this.dataCriacao;
     }
 
-    public Calendar setData (Calendar data)  throws Exception
+    public void setDataEdicao (Date novaData)  throws Exception
     {
-        if (data == null)
+        if (novaData == null)
         {
             throw new Exception ("Data está vazia..."); 
         }
 
-        this.data = data;
+        this.dataEdicao = novaData;
     }
 
-    public Labirinto (int indice, Calendar data, String labirinto) throws Exception
+    public void setConteudo (String novoConteudo)
     {
-        this.setIndice(indice);
-        this.setData(data); 
-        this.setLabirinto(labirinto);
+        this.conteudo = novoConteudo;
+    }
+
+    public String getConteudo ()
+    {
+        return this.conteudo;
     }
 
     public String toString ()
     {
         String ret="";
 
-        ret+="Indice: "+this.indice+"\n";
-        ret+="Data..: "+this.data  +"\n";
-        ret+="Labirinto.: "+this.labirinto;
+        ret+="Indice: "+this.id+"\n";
+        ret+="Email: "+this.emailCliente+"\n";
+        ret+="Labirinto: "+this.conteudo+"\n";
+        ret+="DataCriacao: "+this.dataCriacao+"\n";
+        ret+="DataEdicao: "+this.dataEdicao +"\n";
 
         return ret;
     }
@@ -71,13 +84,7 @@ public class Labirinto implements Cloneable
 
         Labirinto lab = (Labirinto)obj;
 
-        if (this.indice!=lab.indice)
-            return false;
-
-        if (this.nome.equals(liv.nome))
-            return false;
-
-        if (this.preco!=liv.preco)
+        if (this.id!=lab.id)
             return false;
 
         return true;
@@ -87,32 +94,22 @@ public class Labirinto implements Cloneable
     {
         int ret=666;
 
-        ret = 7*ret + new Integer(this.codigo).hashCode();
-        ret = 7*ret + this.nome.hashCode();
-        ret = 7*ret + new Float(this.preco).hashCode();
+        ret = 7*ret + new Integer(this.id).hashCode();
+        ret = 7*ret + this.emailCliente.hashCode();
+        ret = 7*ret + this.conteudo.hashCode();
+        ret = 7*ret + this.dataCriacao.hashCode();
+        ret = 7*ret + this.dataEdicao.hashCode();
 
         return ret;
     }
 
+    public Object clone() {
+        Labirinto ret = null;
 
-    public Livro (Livro modelo) throws Exception
-    {
-        this.codigo = modelo.codigo; // nao clono, pq nao eh objeto
-        this.nome   = modelo.nome;   // nao clono, pq nao eh clonavel
-        this.preco  = modelo.preco;  // nao clono, pq nao eh objeto
-    }
-
-    public Object clone ()
-    {
-        Livro ret=null;
-
-        try
-        {
-            ret = new Livro (this);
+        try {
+            ret = new Labirinto(this);
+        } catch (Exception erro) {
         }
-        catch (Exception erro)
-        {} // nao trato, pq this nunca � null e construtor de
-           // copia da excecao qdo seu parametro for null
 
         return ret;
     }

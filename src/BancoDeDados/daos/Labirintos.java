@@ -6,9 +6,9 @@ import BancoDeDados.*;
 import BancoDeDados.core.*;
 import BancoDeDados.dbos.*;
 
-public class labirintos {
+public class Labirintos {
 
-    public static boolean cadastrado (int codigo) throws Exception
+    public static boolean cadastrado (int id) throws Exception
     {
         boolean retorno = false;
 
@@ -17,14 +17,14 @@ public class labirintos {
             String sql;
 
             sql = "SELECT * " +
-                  "FROM LABIRINTOS " +
-                  "WHERE INDICE = ?";
+                  "FROM Labirintos " +
+                  "WHERE id = ?";
 
-            Connection.COMANDO.prepareStatement (sql);
+            BDSQLServer.COMANDO.prepareStatement (sql);
 
-            Connection.COMANDO.setInt (1, indice);
+            BDSQLServer.COMANDO.setInt (1, id);
 
-            MeuResultSet resultado = (MeuResultSet)Connection.COMANDO.executeQuery ();
+            MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
 
             retorno = resultado.first();
         }
@@ -50,20 +50,20 @@ public class labirintos {
                   "VALUES " +
                   "(?,?,?)";
 
-            Connection.COMANDO.prepareStatement (sql); // preparando tal comando (String sql)
+            BDSQLServer.COMANDO.prepareStatement (sql); // preparando tal comando (String sql)
 
             // Estamos substituindo as interogaçoes por valores de tipos especificos
-            Connection.COMANDO.setString (1, labirinto.getIndice ());
+            BDSQLServer.COMANDO.setString (1, labirinto.getIndice ());
             // BDSQLServer.COMANDO.setData    (2, labirinto. ());
-            Connection.COMANDO.setString  (3, labirinto.getLabirinto ());
+            BDSQLServer.COMANDO.setString  (3, labirinto.getLabirinto ());
 
             // Executamos os comandos de sql, insert e delete
-            Connection.COMANDO.executeUpdate (); 
-            Connection.COMANDO.commit        (); 
+            BDSQLServer.COMANDO.executeUpdate (); 
+            BDSQLServer.COMANDO.commit        (); 
         }
         catch (SQLException erro)
         {
-			Connection.COMANDO.rollback();
+			BDSQLServer.COMANDO.rollback();
             throw new Exception ("Erro ao inserir labirinto");
         }
     }
@@ -85,18 +85,18 @@ public class labirintos {
                   "SET LABIRINTO=? " +
                   "WHERE INDICE = ?";
 
-            Connection.COMANDO.prepareStatement (sql);
+            BDSQLServer.COMANDO.prepareStatement (sql);
 
-            Connection.COMANDO.setString (1, labirinto.getData ());
-            Connection.COMANDO.setFloat  (2, labirinto.getLabirinto ());
-            Connection.COMANDO.setInt    (3, labirinto.getIndice ());
+            BDSQLServer.COMANDO.setString (1, labirinto.getData ());
+            BDSQLServer.COMANDO.setFloat  (2, labirinto.getLabirinto ());
+            BDSQLServer.COMANDO.setInt    (3, labirinto.getIndice ());
 
-            Connection.COMANDO.executeUpdate ();
-            Connection.COMANDO.commit        ();
+            BDSQLServer.COMANDO.executeUpdate ();
+            BDSQLServer.COMANDO.commit        ();
         }
         catch (SQLException erro)
         {
-			Connection.COMANDO.rollback();
+			BDSQLServer.COMANDO.rollback();
             throw new Exception ("Erro ao atualizar dados de labirinto");
         }
     }
@@ -120,11 +120,11 @@ public class labirintos {
                   "FROM LABIRINTOS " +
                   "WHERE INDICE = ?";
 
-            Connection.COMANDO.prepareStatement (sql);
+            BDSQLServer.COMANDO.prepareStatement (sql);
 
-            Connection.COMANDO.setInt (1, indice);
+            BDSQLServer.COMANDO.setInt (1, indice);
 
-            MeuResultSet resultado = (MeuResultSet)Connection.COMANDO.executeQuery (); // executeQuery para select e retorna objeto de meuResu
+            MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery (); // executeQuery para select e retorna objeto de meuResu
 
             if (!resultado.first()) // first é metodo de meuResultSet -> primeira linha do resultado
                 throw new Exception ("Labirinto não cadastrado");
@@ -153,9 +153,9 @@ public class labirintos {
             sql = "SELECT * " +
                   "FROM LABIRINTOS";
 
-            Connection.COMANDO.prepareStatement (sql);
+            BDSQLServer.COMANDO.prepareStatement (sql);
 
-            resultado = (MeuResultSet)Connection.COMANDO.executeQuery (); // executeQuery para metodos select
+            resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery (); // executeQuery para metodos select
         }
         catch (SQLException erro)
         {

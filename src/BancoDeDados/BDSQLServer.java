@@ -7,7 +7,7 @@ import BancoDeDados.daos.*;
 // import java.sql.DriverManager;
 // import java.sql.SQLException;
 
-public class Connection
+public class BDSQLServer
 {
     public static final MeuPreparedStatement COMANDO; // Constante Comando, de MeuPreparedStatement
 
