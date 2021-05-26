@@ -3,56 +3,41 @@ package ServidorDeLabirintos.Servidor;
 import java.net.*;
 import java.util.*;
 
-public class AceitadoraDeConexao extends Thread
-{
-    private ServerSocket        pedido;
+public class AceitadoraDeConexao extends Thread {
+    private ServerSocket pedido;
     private ArrayList<Parceiro> usuarios;
 
-    public AceitadoraDeConexao
-    (String porta, ArrayList<Parceiro> usuarios)
-    throws Exception
-    {
-        if (porta == null)
-            throw new Exception ("Porta ausente");
-
-        try
-        {
-            this.pedido =
-            new ServerSocket (Integer.parseInt(porta)); // Cria o serverSocket a partir da porta fornecida.
+    public AceitadoraDeConexao(String porta, ArrayList<Parceiro> usuarios) throws Exception {
+        if (porta == null) {
+            throw new Exception("Porta ausente");
         }
-        catch (Exception erro)
-        {
-            throw new Exception ("Porta invalida");
+
+        try {
+            this.pedido = new ServerSocket(Integer.parseInt(porta));// Cria o serverSocket a partir da porta fornecida.
+        } catch (Exception erro) {
+            throw new Exception("Porta invalida");
         }
 
         if (usuarios == null)
-            throw new Exception ("Usuarios ausentes");
+            throw new Exception("Usuarios ausentes");
 
         this.usuarios = usuarios;
     }
 
-    public void run ()
-    {
-        for(;;)
-        {
+    public void run() {
+        while (true) {
             Socket conexao = null;
-            try
-            {
+            try {
                 conexao = this.pedido.accept();
-            }
-            catch (Exception erro)
-            {
+            } catch (Exception erro) {
                 continue;
             }
 
             SupervisoraDeConexao supervisoraDeConexao = null;
-            try
-            {
-                supervisoraDeConexao =
-                new SupervisoraDeConexao (conexao, usuarios);
-            }
-            catch (Exception erro)
-            {} // sei que passei parametros corretos para o construtor
+            try {
+                supervisoraDeConexao = new SupervisoraDeConexao(conexao, usuarios);
+            } catch (Exception erro) {
+            } // sei que passei parametros corretos para o construtor
             supervisoraDeConexao.start();
         }
     }

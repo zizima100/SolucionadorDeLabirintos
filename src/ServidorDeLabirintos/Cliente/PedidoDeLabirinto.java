@@ -1,27 +1,52 @@
 package ServidorDeLabirintos.Cliente;
 
+import BancoDeDados.dbos.*;
+
 // Classe que deve estar presente tanto no cliente quanto no servidor.
 
 /**
  * Classe responsável por armazenar o comunicado de pedido de labirinto.
  * 
  * <p>
- * Enviado o labirinto guardado do servidor para o cliente.
+ * Cliente pede um labirinto a partir do ID do labirinto listado.
  * </p>
  * 
  * Servidor responde mandando objeto da classe Resultado para o cliente
  */
-public class PedidoDeLabirinto extends Comunicado { 
-    // Provavelmente precisamos apenas de um atributo chamado ID que irá armazenar o ID do labirinto solicitado.
+public class PedidoDeLabirinto extends Comunicado {
+    // Provavelmente precisamos apenas de um atributo chamado ID que irá armazenar o
+    // ID do labirinto solicitado.
 
     int idLabirinto;
+    Labirinto labirinto = null;
 
+    /**
+     * Construct do pedido do cliente para o servidor.
+     * 
+     * @param id o id do labirinto que deseja receber do servidor.
+     */
     public PedidoDeLabirinto(int id) {
         this.idLabirinto = id;
     }
 
     /**
-     * @return Retorna o valor do ID do labirinto.
+     * Construct do pedido do servidor para o cliente.
+     * 
+     * @param labirinto o labirinto que o cliente pediu.
+     */
+    public PedidoDeLabirinto(Labirinto labirinto) {
+        this.labirinto = labirinto;
+    }
+
+    /**
+     * @return labirinto pedido pelo cliente e enviado pelo servidor.
+     */
+    public Labirinto getLabirinto() {
+        return this.labirinto;
+    }
+
+    /**
+     * @return ID do labirinto enviado pelo cliente.
      */
     public int getIdLabirinto() {
         return this.idLabirinto;

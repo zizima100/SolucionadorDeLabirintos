@@ -15,20 +15,17 @@ public class Servidor
             System.err.println ("Uso esperado: java Servidor [PORTA]\n");
             return;
         }
-
         String porta = Servidor.PORTA_PADRAO;
-        
-        if (args.length==1)
+        if (args.length==1) {
             porta = args[0];
+        }
 
-        ArrayList<Parceiro> usuarios =
-        new ArrayList<Parceiro> ();
+        ArrayList<Parceiro> usuarios = new ArrayList<Parceiro>();
 
         AceitadoraDeConexao aceitadoraDeConexao=null;
         try
         {
-            aceitadoraDeConexao =
-            new AceitadoraDeConexao (porta, usuarios);
+            aceitadoraDeConexao = new AceitadoraDeConexao (porta, usuarios);
             aceitadoraDeConexao.start();
         }
         catch (Exception erro)
@@ -37,7 +34,7 @@ public class Servidor
             return;
         }
 
-        for(;;)
+        while (true)
         {
             System.out.println ("O servidor esta ativo! Para desativa-lo,");
             System.out.println ("use o comando \"desativar\"\n");

@@ -134,7 +134,7 @@ public class Cliente
 					{
 						new EditorDeLabirinto();
 					} 
-					catch (Exception e) 
+					catch (Exception e)
 					{
 						System.err.println(e.getMessage());
 						continue;
@@ -153,9 +153,8 @@ public class Cliente
 						servidor.envie(new PedidoDeLabirintos(/*email*/));
 						Comunicado comunicado = null;
 						do {
-							
+							// Printar labirinto por labirinto registrado no e-mail.
 						} while (!(comunicado instanceof Labirintos));
-
 
 						System.out.println ("Insira o valor do ID do labirinto que deseja editar.");
 						System.out.println ("ID: ");
