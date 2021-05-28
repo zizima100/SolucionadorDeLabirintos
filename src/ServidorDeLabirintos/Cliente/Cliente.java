@@ -1,9 +1,10 @@
 package ServidorDeLabirintos.Cliente;
 
 import java.net.*;
-
+import java.util.*;
+import BancoDeDados.daos.*;
+import BancoDeDados.dbos.*;
 import App.EditorDeLabirinto;
-
 import java.io.*;
 
 /**
@@ -150,11 +151,25 @@ public class Cliente
 					{
 						System.out.println ("Os labirintos disponíveis são:");
 						// Printar todos os IDs + data de criação + data de edicao.
-						servidor.envie(new PedidoDeLabirintos(/*email*/));
+						servidor.receba(new PedidoDeLabirintos(email));
 						Comunicado comunicado = null;
 						do {
-							// Printar labirinto por labirinto registrado no e-mail.
-						} while (!(comunicado instanceof Labirintos));
+							comunicado = (Comunicado)servidor.espie ();
+						} while (!(comunicado instanceof PedidoDeLabirintos));
+						PedidoDeLabirintos pedido = (PedidoDeLabirintos)servidor.envie();
+						Vector<Labirinto> labirintos = pedido.getLabirintos();
+
+						// PAREI AQUI.
+						// AINDA NÃO TESTEI SE A COMUNICAÇÃO COM CLIENTE SERVIDOR ESTÁ FUNCIONANDO.
+						// TERMINEI DE FAZER COM QUE O CLIENTE POSSA ENVIAR E RECEBER UM PEDIDO DE LABIRINTO ATRAVÉS DE ID
+						// TERMINEI DE FAZER COM QUE O CLIENTE POSSA ENVIAR E RECEBER UM PEDIDO DE LABIRINTOS ATRAVÉS DE EMAIL
+						// PRECISA TERMINAR DE:
+						// - FAZER O CLIENTE
+						// - IMPLEMENTAR A SUPERVISORA DE CONEXÃO
+
+						for (int i = 0; i < labirintos.size(); i++) {
+							System.out.println(labirintos.get(i));
+						}
 
 						System.out.println ("Insira o valor do ID do labirinto que deseja editar.");
 						System.out.println ("ID: ");

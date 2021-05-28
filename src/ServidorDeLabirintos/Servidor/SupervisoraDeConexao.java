@@ -3,6 +3,10 @@ package ServidorDeLabirintos.Servidor;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import BancoDeDados.daos.*;
+import BancoDeDados.dbos.*;
+import BancoDeDados.BDSQLServer;
+import BancoDeDados.core.MeuResultSet;
 
 public class SupervisoraDeConexao extends Thread {
     private double valor = 0;
@@ -64,7 +68,26 @@ public class SupervisoraDeConexao extends Thread {
                     // que voce vai fazer
                     // -----
                     // desconectar o usuario
-                } else if (comunicado instanceof PedidoDeAbertura) {
+                } else if (comunicado instanceof PedidoDeEdicao) {
+                    // pegar do comunicado o nome do desenho e a identificacao
+                    // cliente, usar o DAO e DBO para recuperar do BD os dados,
+                    // preencher um objeto do tipo Desenho e vai enviar pro
+                    // cliente fazendo usuario.receba(desenho)
+                    // -----
+                    // desconecta o usuario
+                } else if (comunicado instanceof PedidoDeLabirinto) {
+                    PedidoDeLabirinto pedido = (PedidoDeLabirinto)comunicado;
+
+                    pedido.setLabirinto(Labirintos.getLabirinto(pedido.getIdLabirinto()));
+
+                    usuario.receba(pedido);
+                } else if (comunicado instanceof PedidoDeLabirintos) {
+                    PedidoDeLabirintos pedido = (PedidoDeLabirintos)comunicado;
+
+                    pedido.setLabirintos(Labirintos.getLabirintos(pedido.getEmail()));
+
+                    usuario.receba(pedido);
+                } else if (comunicado instanceof PedidoParaSair) {
                     // pegar do comunicado o nome do desenho e a identificacao
                     // cliente, usar o DAO e DBO para recuperar do BD os dados,
                     // preencher um objeto do tipo Desenho e vai enviar pro

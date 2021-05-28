@@ -1,5 +1,6 @@
 package ServidorDeLabirintos.Servidor;
 
+import BancoDeDados.daos.*;
 import BancoDeDados.dbos.*;
 import java.util.Vector;
 
@@ -35,6 +36,10 @@ public class PedidoDeLabirintos extends Comunicado {
      */
     public PedidoDeLabirintos(Vector<Labirinto> labirintos) {
         this.labirintos = labirintos;
+    }
+
+    public void setLabirintos(Vector<Labirinto> vLabirintos) {
+        this.labirintos = vLabirintos;
     }
 
     /**

@@ -38,6 +38,10 @@ public class PedidoDeLabirinto extends Comunicado {
         this.labirinto = labirinto;
     }
 
+    public void setLabirinto(Labirinto labirinto) {
+        this.labirinto = labirinto;
+    }
+
     /**
      * @return labirinto pedido pelo cliente e enviado pelo servidor.
      */

@@ -1,4 +1,6 @@
-package ServidorDeLabirintos.Cliente;
+package ServidorDeLabirintos.Servidor;
+
+import java.io.Serializable;
 
 /**
  * Esta classe representa um comunicado de que o servidor será desligado e o
@@ -11,7 +13,7 @@ package ServidorDeLabirintos.Cliente;
  * 
  * Essa classe deve ser oca.
  */
-public class ComunicadoDesligamento {
+public class ComunicadoDeDesligamento extends Comunicado{
     // Mensagem para todos clientes, notificando que o servidor está encerrando
     // (MENSAGEM DO SERVIDOR).
     // (No servidor) -> Desativar -> é criado e instaciado objeto dessa classe ->

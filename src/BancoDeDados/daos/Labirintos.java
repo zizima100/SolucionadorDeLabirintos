@@ -1,6 +1,7 @@
 package BancoDeDados.daos;
 
 import java.sql.*;
+import java.util.*;
 
 import BancoDeDados.*;
 import BancoDeDados.core.*;
@@ -142,26 +143,38 @@ public class Labirintos {
     }
 
     // Método para recuperar todos os labirintos
-    public static MeuResultSet getLabirintos () throws Exception
+    public static Vector<Labirinto> getLabirintos (String email) throws Exception
     {
         MeuResultSet resultado = null;
+        Vector<Labirinto> vLabirintos = new Vector<Labirinto>();
 
         try
         {
             String sql;
 
-            sql = "SELECT * " +
-                  "FROM LABIRINTOS";
+            sql = "SELECT * " + "FROM Labirintos " + "WHERE emailCliente = ?";
 
-            BDSQLServer.COMANDO.prepareStatement (sql);
+            BDSQLServer.COMANDO.prepareStatement(sql);
 
-            resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery (); // executeQuery para metodos select
+            BDSQLServer.COMANDO.setString(1, email);
+
+            resultado = (MeuResultSet) BDSQLServer.COMANDO.executeQuery();
+
+            if (!resultado.first()) {
+                throw new Exception ("Labirinto não cadastrado");
+            } // first é metodo de meuResultSet -> primeira linha do resultado
+
+            int i = 0;
+            do {
+                vLabirintos.add(new Labirinto (resultado.getInt("id"), resultado.getString("emailCliente"), resultado.getString("conteudo"), resultado.getDate("dataCriacao"), resultado.getDate("dataEdicao")));
+                resultado.next();
+                i++;
+            } while (i < resultado.getFetchSize());
         }
         catch (SQLException erro)
         {
             throw new Exception ("Erro ao recuperar labirintos");
         }
-
-        return resultado;
+        return vLabirintos;
     }
 }

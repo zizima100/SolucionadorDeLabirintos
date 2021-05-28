@@ -12,6 +12,7 @@ public class teste {
             Labirinto teste = Labirintos.getLabirinto(3);
             teste.setConteudo("###teste-alterado###");
             Labirintos.alterar(teste);
+            new Date(System.currentTimeMillis());
         } catch (Exception erro) {
             System.err.println(erro.getMessage());
         }

@@ -1,4 +1,4 @@
-package ServidorDeLabirintos.Servidor;
+package ServidorDeLabirintos.Cliente;
 
 import BancoDeDados.dbos.*;
 
@@ -35,6 +35,10 @@ public class PedidoDeLabirinto extends Comunicado {
      * @param labirinto o labirinto que o cliente pediu.
      */
     public PedidoDeLabirinto(Labirinto labirinto) {
+        this.labirinto = labirinto;
+    }
+
+    public void setLabirinto(Labirinto labirinto) {
         this.labirinto = labirinto;
     }
 
