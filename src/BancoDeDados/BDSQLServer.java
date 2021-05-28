@@ -22,10 +22,6 @@ public class BDSQLServer
                 "com.microsoft.sqlserver.jdbc.SQLServerDriver",
                 "jdbc:sqlserver://jdvpic.database.windows.net;databasename=ProjetoIntegradoC",
                 "grupo", "jdvpic123!");
-                // String dbURL = "jdbc:sqlserver://localhost\\sqlexpress";
-                // String user = "sa";
-                // String pass = "secret";
-                // conn = DriverManager.getConnection(dbURL, user, pass);
         }
         catch (Exception erro)
         {

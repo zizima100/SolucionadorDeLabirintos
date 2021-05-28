@@ -82,7 +82,7 @@ public class Cliente {
 
 		String email = "";
 		do {
-			System.out.println("Digite o seu email: ");
+			System.out.printf("Digite o seu email: ");
 			try {
 				email = Teclado.getUmString().toLowerCase();
 			} catch (Exception e) {
@@ -134,28 +134,33 @@ public class Cliente {
 						servidor.receba(new PedidoDeLabirintos(email));
 						Comunicado comunicado = null;
 						do {
-							comunicado = (Comunicado) servidor.espie();
+							comunicado = (Comunicado) servidor.espie(); // O PROBLEMA ESTÁ NO ESPIE!
 						} while (!(comunicado instanceof PedidoDeLabirintos));
 						PedidoDeLabirintos pedido = (PedidoDeLabirintos) servidor.envie();
-
+						
 						Vector<Labirinto> vLabirintos = pedido.getLabirintos();
-						for (int i = 0; i < vLabirintos.size(); i++) {
-							System.out.println(vLabirintos.get(i));
-							idsDisponiveis.add(vLabirintos.get(i).getId());
-						}
-
-						System.out.println("Insira o valor do ID do labirinto que deseja editar.");
-						System.out.println("ID: ");
-
-						try {
-							opcaoID = Teclado.getUmInt();
-						} catch (Exception erro) {
-							System.err.println("ID invalido!\n");
-							continue;
-						}
-
-						if (idsDisponiveis.indexOf(opcaoID) == -1) {
-							System.err.println("ID invalido!\n");
+						if (vLabirintos.size() > 0) {
+							for (int i = 0; i < vLabirintos.size(); i++) {
+								System.out.println(vLabirintos.get(i));
+								idsDisponiveis.add(vLabirintos.get(i).getId());
+							}
+	
+							System.out.println("Insira o valor do ID do labirinto que deseja editar.");
+							System.out.println("ID: ");
+	
+							try {
+								opcaoID = Teclado.getUmInt();
+							} catch (Exception erro) {
+								System.err.println("ID invalido!\n");
+								continue;
+							}
+	
+							if (idsDisponiveis.indexOf(opcaoID) == -1) {
+								System.err.println("ID invalido!\n");
+							}
+						} else {
+							System.out.println("Nenhum Labirinto registrado neste e-mail. . .");
+							break;
 						}
 
 					} while (idsDisponiveis.indexOf(opcaoID) == -1);
