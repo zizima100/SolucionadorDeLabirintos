@@ -164,12 +164,39 @@ public class Labirintos {
                 throw new Exception ("Labirinto não cadastrado");
             } // first é metodo de meuResultSet -> primeira linha do resultado
 
-            int i = 0;
             do {
                 vLabirintos.add(new Labirinto (resultado.getInt("id"), resultado.getString("emailCliente"), resultado.getString("conteudo"), resultado.getDate("dataCriacao"), resultado.getDate("dataEdicao")));
-                resultado.next();
-                i++;
-            } while (i < resultado.getFetchSize());
+            } while (resultado.next());
+        }
+        catch (SQLException erro)
+        {
+            throw new Exception ("Erro ao recuperar labirintos");
+        }
+        return vLabirintos;
+    }
+
+    public static Vector<Labirinto> getTodosLabirintos () throws Exception
+    {
+        MeuResultSet resultado = null;
+        Vector<Labirinto> vLabirintos = new Vector<Labirinto>();
+
+        try
+        {
+            String sql;
+
+            sql = "SELECT * " + "FROM Labirintos";
+
+            BDSQLServer.COMANDO.prepareStatement(sql);
+
+            resultado = (MeuResultSet) BDSQLServer.COMANDO.executeQuery();
+
+            if (!resultado.first()) {
+                throw new Exception ("Nenhum labirinto encontrado");
+            } // first é metodo de meuResultSet -> primeira linha do resultado
+
+            do {
+                vLabirintos.add(new Labirinto (resultado.getInt("id"), resultado.getString("emailCliente"), resultado.getString("conteudo"), resultado.getDate("dataCriacao"), resultado.getDate("dataEdicao")));
+            } while (resultado.next());
         }
         catch (SQLException erro)
         {

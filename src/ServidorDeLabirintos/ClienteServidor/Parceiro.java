@@ -60,9 +60,11 @@ public class Parceiro
     {
         try
         {
+            System.out.println(proximoComunicado);
             this.mutEx.acquireUninterruptibly();
             if (this.proximoComunicado==null) this.proximoComunicado = (Comunicado)this.receptor.readObject();
             this.mutEx.release();
+            System.out.println(proximoComunicado);
             return this.proximoComunicado;
         }
         catch (Exception erro)
