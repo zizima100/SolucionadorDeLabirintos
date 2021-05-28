@@ -2,6 +2,7 @@ package ServidorDeLabirintos.Servidor;
 
 import java.net.*;
 import java.util.*;
+import ServidorDeLabirintos.ClienteServidor.*;
 
 public class AceitadoraDeConexao extends Thread {
     private ServerSocket pedido;

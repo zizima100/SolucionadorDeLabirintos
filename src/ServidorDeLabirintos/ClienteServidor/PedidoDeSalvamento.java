@@ -1,4 +1,4 @@
-package ServidorDeLabirintos.Cliente;
+package ServidorDeLabirintos.ClienteServidor;
 
 import BancoDeDados.dbos.*;
 

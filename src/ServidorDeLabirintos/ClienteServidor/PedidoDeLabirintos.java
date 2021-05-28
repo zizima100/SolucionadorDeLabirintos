@@ -1,7 +1,7 @@
-package ServidorDeLabirintos.Cliente;
+package ServidorDeLabirintos.ClienteServidor;
 
-import BancoDeDados.daos.*;
 import BancoDeDados.dbos.*;
+
 import java.util.Vector;
 
 // Classe que deve estar presente tanto no cliente quanto no servidor.

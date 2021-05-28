@@ -88,9 +88,9 @@ public class Labirinto implements Cloneable
 
         ret+="Indice: "+this.id+"\n";
         ret+="Email: "+this.emailCliente+"\n";
-        ret+="Labirinto: "+this.conteudo+"\n";
         ret+="DataCriacao: "+this.dataCriacao+"\n";
         ret+="DataEdicao: "+this.dataEdicao +"\n";
+        ret+="------------------------------------------------";
 
         return ret;
     }

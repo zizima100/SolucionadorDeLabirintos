@@ -4,12 +4,9 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import BancoDeDados.daos.*;
-import BancoDeDados.dbos.*;
-import BancoDeDados.BDSQLServer;
-import BancoDeDados.core.MeuResultSet;
+import ServidorDeLabirintos.ClienteServidor.*;
 
 public class SupervisoraDeConexao extends Thread {
-    private double valor = 0;
     private Parceiro usuario;
     private Socket conexao;
     private ArrayList<Parceiro> usuarios;

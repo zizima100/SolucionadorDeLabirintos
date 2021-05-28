@@ -1,4 +1,4 @@
-package ServidorDeLabirintos.Cliente;
+package ServidorDeLabirintos.ClienteServidor;
 
 /**
  * Esta classe representa um comunicado de que o servidor será desligado e o

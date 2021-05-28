@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import BancoDeDados.dbos.*;
 /**
  * UI do projeto.
  */
@@ -44,6 +45,53 @@ public class EditorDeLabirinto {
         editorDeTexto.setFont(new Font("Monospaced", Font.PLAIN, 16));
         visorErros.setFont(new Font("Monospaced", Font.PLAIN, 20));
         visorErros.setForeground(Color.RED);
+        
+        // Faz a janela iniciar centralizada.
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int x = (screenSize.width - janela.getWidth()) / 2;
+        int y = (screenSize.height - janela.getHeight()) / 2;
+        this.janela.setLocation(x, y);
+        
+        // Propriedades funcionais da janela.
+        this.janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        visorErros.setEditable(false); 
+        JScrollPane sp = new JScrollPane(editorDeTexto); // Scroll do Editor
+        this.janela.getContentPane().add(sp);
+        
+        //Faz botao salvar ficar disabled.
+        editorDeTexto.addKeyListener(keyboardListener);
+        botao[4].setEnabled(false);
+    }
+
+    public EditorDeLabirinto(Labirinto labirintoImportado) {
+        JPanel botoes = new JPanel(); // jpanel recebe varios componentes layoutManager
+        botoes.setLayout(new GridLayout(1, 5)); // criamos os icones de botao 
+        String textosBotoes[] = { "Novo", "Importar", "Validar", "Solucionar", "Salvar" }; 
+        
+        TratadorDeMouse tratadorDeMouse = new TratadorDeMouse();
+        KeyboardListener keyboardListener = new KeyboardListener();
+
+        for (int i = 0; i < this.botao.length; i++) {
+            this.botao[i] = new JButton(textosBotoes[i]); // instanciamos os botoes com os determinados nomes 
+            this.botao[i].setActionCommand(textosBotoes[i]); 
+            this.botao[i].addActionListener(tratadorDeMouse); 
+            botoes.add(this.botao[i]); // adicionamos o botao com determinado nome 
+        }
+        
+        // Propriedades estéticas da janela.
+        this.janela.setSize(750, 900);
+        this.janela.getContentPane().setLayout(new BorderLayout());
+        this.janela.add(botoes, BorderLayout.NORTH);
+        this.janela.add(this.editorDeTexto, BorderLayout.CENTER);
+        this.janela.add(this.visorErros, BorderLayout.SOUTH);
+        this.janela.setVisible(true);
+        editorDeTexto.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        visorErros.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        visorErros.setForeground(Color.RED);
+
+        // Importa a string do labirinto improtado.
+        editorDeTexto.setText(labirintoImportado.getConteudo());
         
         // Faz a janela iniciar centralizada.
         Toolkit toolkit = Toolkit.getDefaultToolkit();

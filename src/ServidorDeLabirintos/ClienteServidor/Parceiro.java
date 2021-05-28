@@ -1,8 +1,7 @@
-package ServidorDeLabirintos.Servidor;
+package ServidorDeLabirintos.ClienteServidor;
 
 import java.io.*;
 import java.net.*;
-import java.util.*;
 import java.util.concurrent.Semaphore;
 
 // Classe que deve estar presente tanto no cliente quanto no servidor.
@@ -110,3 +109,4 @@ public class Parceiro
         }
     }
 }
+

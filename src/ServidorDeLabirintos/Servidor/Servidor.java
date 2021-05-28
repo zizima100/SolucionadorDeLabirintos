@@ -1,8 +1,7 @@
 package ServidorDeLabirintos.Servidor;
 
-import java.io.*;
-import java.net.*;
 import java.util.*;
+import ServidorDeLabirintos.ClienteServidor.*;
 
 public class Servidor {
     public static String PORTA_PADRAO = "3000";

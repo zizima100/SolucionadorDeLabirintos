@@ -1,6 +1,5 @@
-package ServidorDeLabirintos.Cliente;
+package ServidorDeLabirintos.ClienteServidor;
 
-import java.io.*;
 import java.io.Serializable;
 
 /**

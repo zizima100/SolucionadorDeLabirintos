@@ -1,6 +1,6 @@
 package ServidorDeLabirintos.Cliente;
 
-import java.net.*;
+import ServidorDeLabirintos.ClienteServidor.*;
 
 /**
  * Classe do cliente responsável por tratar o que acontecerá caso o cliente
