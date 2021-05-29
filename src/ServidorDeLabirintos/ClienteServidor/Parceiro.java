@@ -58,13 +58,16 @@ public class Parceiro
 
     public Comunicado espie () throws Exception
     {
+        System.out.println("Entrei no Espie!");
         try
         {
-            System.out.println(proximoComunicado);
+            System.out.println("Próximo comunicado inicio-espie: " + proximoComunicado);
             this.mutEx.acquireUninterruptibly();
-            if (this.proximoComunicado==null) this.proximoComunicado = (Comunicado)this.receptor.readObject();
+            if (this.proximoComunicado==null) {
+                this.proximoComunicado = (Comunicado)this.receptor.readObject();
+            }
             this.mutEx.release();
-            System.out.println(proximoComunicado);
+            System.out.println("Próximo comunicado fim-espie: " + proximoComunicado);
             return this.proximoComunicado;
         }
         catch (Exception erro)
@@ -82,9 +85,13 @@ public class Parceiro
     {
         try
         {
-            if (this.proximoComunicado==null) this.proximoComunicado = (Comunicado)this.receptor.readObject();
-            Comunicado ret         = this.proximoComunicado;
+            System.out.println("Recebi para envio: " + this.proximoComunicado);
+            if (this.proximoComunicado == null) {
+                this.proximoComunicado = (Comunicado)this.receptor.readObject();
+            }
+            Comunicado ret = this.proximoComunicado;
             this.proximoComunicado = null;
+            System.out.println("Sai para envio: " + ret);
             return ret;
         }
         catch (Exception erro)

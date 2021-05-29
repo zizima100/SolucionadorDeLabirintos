@@ -10,10 +10,10 @@ public class teste {
     public static void main(String[] args) {
 
         try {
-            Vector<Labirinto> todosOsLabirintos = Labirintos.getTodosLabirintos();
+            Vector<Labirinto> vLabirintos = Labirintos.getLabirintos("j@j.com");
 
-            for(int i = 0; i < todosOsLabirintos.size(); i++) {
-                System.out.println(todosOsLabirintos.get(i));
+            for(int i = 0; i < vLabirintos.size(); i++) {
+                System.out.println(vLabirintos.get(i));
             }
         } catch (Exception erro) {
             System.err.println(erro.getMessage());

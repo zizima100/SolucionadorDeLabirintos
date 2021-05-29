@@ -89,6 +89,11 @@ public class Cliente {
 				System.err.println("Opcao invalida!\n");
 				continue;
 			}
+			if (email.indexOf('@') == -1 || email.length() < 7) {
+				System.err.println("E-mail inválido!");
+				continue;
+			}
+
 		} while (email.indexOf('@') == -1 || email.length() < 7);
 
 		char opcao = ' ';
@@ -134,7 +139,7 @@ public class Cliente {
 						servidor.receba(new PedidoDeLabirintos(email));
 						Comunicado comunicado = null;
 						do {
-							comunicado = (Comunicado) servidor.espie(); // O PROBLEMA ESTÁ NO ESPIE!
+							comunicado = (Comunicado) servidor.espie();
 						} while (!(comunicado instanceof PedidoDeLabirintos));
 						PedidoDeLabirintos pedido = (PedidoDeLabirintos) servidor.envie();
 						

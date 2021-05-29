@@ -80,10 +80,12 @@ public class SupervisoraDeConexao extends Thread {
                     usuario.receba(pedido);
                 } else if (comunicado instanceof PedidoDeLabirintos) {
                     PedidoDeLabirintos pedido = (PedidoDeLabirintos)comunicado;
+                    System.out.println("Recebi o pedido de labirintos: " + pedido);
 
-                    pedido.setLabirintos(Labirintos.getLabirintos(pedido.getEmail()));
-
-                    usuario.receba(pedido);
+                    PedidoDeLabirintos retorno = new PedidoDeLabirintos(Labirintos.getLabirintos(pedido.getEmail()));
+                    System.out.println("Retornei o pedido de labirintos: " + retorno);
+                    
+                    usuario.receba(retorno);
                 } else if (comunicado instanceof PedidoParaSair) {
                     // pegar do comunicado o nome do desenho e a identificacao
                     // cliente, usar o DAO e DBO para recuperar do BD os dados,
