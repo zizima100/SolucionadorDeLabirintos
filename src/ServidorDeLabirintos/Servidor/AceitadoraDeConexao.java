@@ -2,7 +2,8 @@ package ServidorDeLabirintos.Servidor;
 
 import java.net.*;
 import java.util.*;
-import ServidorDeLabirintos.ClienteServidor.*;
+
+import ServidorDeLabirintos.Compartilhado.*;
 
 public class AceitadoraDeConexao extends Thread {
     private ServerSocket pedido;

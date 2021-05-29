@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import BancoDeDados.daos.*;
-import ServidorDeLabirintos.ClienteServidor.*;
+import ServidorDeLabirintos.Compartilhado.*;
 
 public class SupervisoraDeConexao extends Thread {
     private Parceiro usuario;

@@ -1,6 +1,6 @@
 package ServidorDeLabirintos.Cliente;
 
-import ServidorDeLabirintos.ClienteServidor.*;
+import ServidorDeLabirintos.Compartilhado.*;
 
 /**
  * Classe do cliente responsável por tratar o que acontecerá caso o cliente

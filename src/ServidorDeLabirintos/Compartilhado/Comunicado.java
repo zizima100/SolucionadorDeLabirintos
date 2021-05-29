@@ -1,4 +1,4 @@
-package ServidorDeLabirintos.ClienteServidor;
+package ServidorDeLabirintos.Compartilhado;
 
 import java.io.Serializable;
 

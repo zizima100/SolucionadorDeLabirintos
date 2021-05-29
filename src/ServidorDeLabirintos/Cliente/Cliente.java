@@ -4,7 +4,7 @@ import java.net.*;
 import java.util.*;
 import BancoDeDados.daos.*;
 import BancoDeDados.dbos.*;
-import ServidorDeLabirintos.ClienteServidor.*;
+import ServidorDeLabirintos.Compartilhado.*;
 import App.EditorDeLabirinto;
 import java.io.*;
 
