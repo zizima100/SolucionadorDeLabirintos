@@ -20,7 +20,7 @@ public class BDSQLServer
             comando =
             new MeuPreparedStatement (
                 "com.microsoft.sqlserver.jdbc.SQLServerDriver",
-                "jdbc:sqlserver://jdvpic.database.windows.net;databasename=ProjetoIntegradoC",
+                "jdbc:sqlserver://jdvpic2.database.windows.net;databasename=ProjetoIntegradoC",
                 "grupo", "jdvpic123!");
         }
         catch (Exception erro)

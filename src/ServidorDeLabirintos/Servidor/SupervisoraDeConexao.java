@@ -56,8 +56,9 @@ public class SupervisoraDeConexao extends Thread {
             while (true) {
                 Comunicado comunicado = this.usuario.envie();
 
-                if (comunicado == null)
+                if (comunicado == null) {
                     return;
+                }
                 else if (comunicado instanceof PedidoDeSalvamento) {
                     // pegar do comunicado o vetor cheio de desenhos
                     // e mais o nome do desenho e mais identificacao
@@ -66,6 +67,9 @@ public class SupervisoraDeConexao extends Thread {
                     // -----
                     // desconectar o usuario
                 } else if (comunicado instanceof PedidoDeEdicao) {
+                    PedidoDeEdicao pedido = (PedidoDeEdicao)comunicado;
+
+
                     // pegar do comunicado o nome do desenho e a identificacao
                     // cliente, usar o DAO e DBO para recuperar do BD os dados,
                     // preencher um objeto do tipo Desenho e vai enviar pro
@@ -80,12 +84,10 @@ public class SupervisoraDeConexao extends Thread {
                     usuario.receba(pedido);
                 } else if (comunicado instanceof PedidoDeLabirintos) {
                     PedidoDeLabirintos pedido = (PedidoDeLabirintos)comunicado;
-                    System.out.println("Recebi o pedido de labirintos: " + pedido);
 
-                    PedidoDeLabirintos retorno = new PedidoDeLabirintos(Labirintos.getLabirintos(pedido.getEmail()));
-                    System.out.println("Retornei o pedido de labirintos: " + retorno);
-                    
-                    usuario.receba(retorno);
+                    pedido.setLabirintos(Labirintos.getLabirintos(pedido.getEmail()));
+
+                    usuario.receba(pedido);
                 } else if (comunicado instanceof PedidoParaSair) {
                     // pegar do comunicado o nome do desenho e a identificacao
                     // cliente, usar o DAO e DBO para recuperar do BD os dados,

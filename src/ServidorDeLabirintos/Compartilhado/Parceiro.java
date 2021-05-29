@@ -7,30 +7,33 @@ import java.util.concurrent.Semaphore;
 
 public class Parceiro
 {
-    private Socket             conexao;
-    private ObjectInputStream  receptor;
+    private Socket conexao;
+    private ObjectInputStream receptor;
     private ObjectOutputStream transmissor;
     
     private Comunicado proximoComunicado=null;
 
     private Semaphore mutEx = new Semaphore (1,true);
 
-    public Parceiro (Socket             conexao,
-                     ObjectInputStream  receptor,
+    public Parceiro (Socket conexao,
+                     ObjectInputStream receptor,
                      ObjectOutputStream transmissor)
                      throws Exception // se parametro nulos
     {
-        if (conexao==null)
+        if (conexao==null) {
             throw new Exception ("Conexao ausente");
+        }
 
-        if (receptor==null)
+        if (receptor==null) {
             throw new Exception ("Receptor ausente");
+        }
 
-        if (transmissor==null)
+        if (transmissor==null) {
             throw new Exception ("Transmissor ausente");
+        }
 
-        this.conexao     = conexao;
-        this.receptor    = receptor;
+        this.conexao = conexao;
+        this.receptor = receptor;
         this.transmissor = transmissor;
     }
 
@@ -39,7 +42,7 @@ public class Parceiro
         try
         {
             this.transmissor.writeObject (x);
-            this.transmissor.flush       ();
+            this.transmissor.flush ();
         }
         catch (IOException erro)
         {
@@ -52,8 +55,13 @@ public class Parceiro
         try
         {
             this.mutEx.acquireUninterruptibly();
-            if (this.proximoComunicado==null) this.proximoComunicado = (Comunicado)this.receptor.readObject();
+            System.out.println("Peguei um ponto do semáforo.");
+            if (this.proximoComunicado==null) {
+                System.out.println("Estou tentando ler o objeto no espie.");
+                this.proximoComunicado = (Comunicado)this.receptor.readObject();
+            }
             this.mutEx.release();
+            System.out.println("Liberei o ponto do semáforo.");
             return this.proximoComunicado;
         }
         catch (Exception erro)
@@ -66,8 +74,10 @@ public class Parceiro
     {
         try
         {
-            if (this.proximoComunicado==null) this.proximoComunicado = (Comunicado)this.receptor.readObject();
-            Comunicado ret         = this.proximoComunicado;
+            if (this.proximoComunicado==null) {
+                this.proximoComunicado = (Comunicado)this.receptor.readObject();
+            }
+            Comunicado ret = this.proximoComunicado;
             this.proximoComunicado = null;
             return ret;
         }
