@@ -117,18 +117,24 @@ public class Cliente {
 
 			try {
 				if (opcao == 'N') {
-					// Aqui é para abrir o editor de labirinto sem ter nenhum labirinto dentro. Acho
-					// que devemos remover o botão importar.
-					System.out.print("Você selecionou a opção de criar um novo labirinto!");
 					try {
-						new EditorDeLabirinto(servidor, email);
+						// Cria novo labirinto a partir do e-mail (data de criação e edição dentro da DBO).
+						Labirinto novoLabirinto = new Labirinto(email);
+						EditorDeLabirinto editor = new EditorDeLabirinto(novoLabirinto);
+
+						// Bloco que verifica se houve salvamento do labirinto editado no editor.
+						Labirinto LabAntesDoSave = (Labirinto)editor.getLabirinto().clone();
+						do {
+							if (!LabAntesDoSave.equals(editor.getLabirinto())) {
+								System.out.println("Vou salvar o labirinto!"); // Substituir pelo pedido de salvamento.
+								servidor.receba(new PedidoDeSalvamento(editor.getLabirinto()));
+								LabAntesDoSave = (Labirinto)editor.getLabirinto().clone();
+							}
+						} while (true);
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 						continue;
 					}
-
-					// Enviamos um comunicado de pedido de salvamento de labirinto para o servidor.
-					// servidor.receba (new PedidoDeSalvamento (labirinto));
 				} else if (opcao == 'E') {
 					int opcaoID = 0;
 					Vector<Integer> idsDisponiveis = new Vector<Integer>();
@@ -167,18 +173,27 @@ public class Cliente {
 						}
 					} while (idsDisponiveis.indexOf(opcaoID) == -1);
 
-					// Abrir editor com o labirinto selecionado.
+					// Pegando Labirinto do Banco.
 					servidor.receba(new PedidoDeLabirinto(opcaoID));
 					Comunicado comunicado = null;
 					do {
 						comunicado = (Comunicado) servidor.espie();
 					} while (!(comunicado instanceof PedidoDeLabirinto));
 					PedidoDeLabirinto resultado = (PedidoDeLabirinto) servidor.envie();
-
 					Labirinto labirintoImportado = resultado.getLabirinto();
 
-					System.out.println(labirintoImportado.getConteudo());
-					new EditorDeLabirinto(servidor, labirintoImportado);
+					// Abrindo editor com o labirinto importado.
+					EditorDeLabirinto editor = new EditorDeLabirinto(labirintoImportado);
+
+					// Bloco que verifica se houve salvamento do labirinto editado no editor.
+					Labirinto LabAntesDoSave = (Labirinto)labirintoImportado.clone();
+					do {
+						if (!LabAntesDoSave.equals(editor.getLabirinto())) {
+							System.out.println("Vou salvar o labirinto!"); // Substituir pelo pedido de salvamento.
+							servidor.receba(new PedidoDeSalvamento(editor.getLabirinto()));
+							LabAntesDoSave = (Labirinto)editor.getLabirinto().clone();
+						}
+					} while (true);
 				}
 			} catch (Exception erro) {
 				System.err.println("Erro de comunicacao com o servidor;");

@@ -7,8 +7,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Date;
-import java.io.*;
-import java.net.*;
 import BancoDeDados.dbos.*;
 import ServidorDeLabirintos.Compartilhado.*;
 
@@ -22,62 +20,12 @@ public class EditorDeLabirinto {
     JTextArea visorErros = new JTextArea(); // text area para visor de error
     JTextArea editorDeTexto = new JTextArea(); // proprio editor de texto
     Labirinto labirintoFinal = null;
-    String emailCliente = "";
-    Parceiro servidor = null;
     
     /**
      * metódo responsável em criar a janela, deixá-la centralizada, criar os botões, determinar suas caracteristicas estéticas 
      * e propriedades funcionais.
      */
-    public EditorDeLabirinto(Parceiro servidor ,String email) {
-        JPanel botoes = new JPanel(); // jpanel recebe varios componentes layoutManager
-        botoes.setLayout(new GridLayout(1, 5)); // criamos os icones de botao 
-        String textosBotoes[] = { "Novo", "Importar", "Validar", "Solucionar", "Salvar" }; 
-        
-        TratadorDeMouse tratadorDeMouse = new TratadorDeMouse();
-        KeyboardListener keyboardListener = new KeyboardListener();
-
-        for (int i = 0; i < this.botao.length; i++) {
-            this.botao[i] = new JButton(textosBotoes[i]); // instanciamos os botoes com os determinados nomes 
-            this.botao[i].setActionCommand(textosBotoes[i]); 
-            this.botao[i].addActionListener(tratadorDeMouse); 
-            botoes.add(this.botao[i]); // adicionamos o botao com determinado nome 
-        }
-        
-        // Propriedades estéticas da janela.
-        this.janela.setSize(750, 900);
-        this.janela.getContentPane().setLayout(new BorderLayout());
-        this.janela.add(botoes, BorderLayout.NORTH);
-        this.janela.add(this.editorDeTexto, BorderLayout.CENTER);
-        this.janela.add(this.visorErros, BorderLayout.SOUTH);
-        this.janela.setVisible(true);
-        editorDeTexto.setFont(new Font("Monospaced", Font.PLAIN, 16));
-        visorErros.setFont(new Font("Monospaced", Font.PLAIN, 20));
-        visorErros.setForeground(Color.RED);
-        
-        // Faz a janela iniciar centralizada.
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        int x = (screenSize.width - janela.getWidth()) / 2;
-        int y = (screenSize.height - janela.getHeight()) / 2;
-        this.janela.setLocation(x, y);
-        
-        // Propriedades funcionais da janela.
-        this.janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        visorErros.setEditable(false); 
-        JScrollPane sp = new JScrollPane(editorDeTexto); // Scroll do Editor
-        this.janela.getContentPane().add(sp);
-        
-        //Faz botao salvar ficar disabled.
-        editorDeTexto.addKeyListener(keyboardListener);
-        botao[4].setEnabled(false);
-
-        //Recebimento das informações do cliente
-        this.emailCliente = email;
-        this.servidor = servidor;
-    }
-
-    public EditorDeLabirinto(Parceiro servidor, Labirinto labirintoImportado) {
+    public EditorDeLabirinto(Labirinto labirintoImportado) {
         JPanel botoes = new JPanel(); // jpanel recebe varios componentes layoutManager
         botoes.setLayout(new GridLayout(1, 5)); // criamos os icones de botao 
         String textosBotoes[] = { "Novo", "Importar", "Validar", "Solucionar", "Salvar" }; 
@@ -122,9 +70,14 @@ public class EditorDeLabirinto {
         botao[4].setEnabled(false);
 
         // Importa infos cliente.
-        editorDeTexto.setText(labirintoImportado.getConteudo());
-        this.emailCliente = labirintoImportado.getEmail();
-        this.servidor = servidor;
+        this.labirintoFinal = labirintoImportado;
+
+        String conteudoImportado = labirintoImportado.getConteudo();
+        editorDeTexto.setText(conteudoImportado.substring(conteudoImportado.indexOf('\n') + 1, conteudoImportado.length()));
+    }
+
+    public Labirinto getLabirinto() {
+        return this.labirintoFinal;
     }
 
     class KeyboardListener implements KeyListener {
@@ -260,25 +213,10 @@ public class EditorDeLabirinto {
 
             int qntLinhas = contLinhas();
             String conteudoLabirinto = qntLinhas + "\n" + editorDeTexto.getText();
-
-            if (labirintoFinal == null) {
-                try {
-                    labirintoFinal = 
-                    new Labirinto(emailCliente, conteudoLabirinto, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()));
-                } catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
-            } else {
-                try {
-                    labirintoFinal.setConteudo(conteudoLabirinto);
-                    labirintoFinal.setDataEdicao(new Date(System.currentTimeMillis()));
-                } catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
-            }
-
+            
             try {
-                servidor.receba(new PedidoDeEdicao(labirintoFinal));
+                labirintoFinal.setConteudo(conteudoLabirinto);
+                labirintoFinal.setDataEdicao(new Date(System.currentTimeMillis()));
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }

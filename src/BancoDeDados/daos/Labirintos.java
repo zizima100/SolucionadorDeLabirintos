@@ -9,147 +9,146 @@ import BancoDeDados.dbos.*;
 
 public class Labirintos {
 
-    public static boolean cadastrado (int id) throws Exception
-    {
+    public static boolean cadastrado(int id) throws Exception {
         boolean retorno = false;
 
-        try
-        {
+        try {
             String sql;
 
-            sql = "SELECT * " +
-                  "FROM Labirintos " +
-                  "WHERE id = ?";
+            sql = "SELECT * " + "FROM Labirintos " + "WHERE id = ?";
 
-            BDSQLServer.COMANDO.prepareStatement (sql);
+            BDSQLServer.COMANDO.prepareStatement(sql);
 
-            BDSQLServer.COMANDO.setInt (1, id);
+            BDSQLServer.COMANDO.setInt(1, id);
 
-            MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery ();
+            MeuResultSet resultado = (MeuResultSet) BDSQLServer.COMANDO.executeQuery();
 
             retorno = resultado.first();
-        }
-        catch (SQLException erro)
-        {
-            throw new Exception ("Erro ao procurar labirinto");
+        } catch (SQLException erro) {
+            throw new Exception("Erro ao procurar labirinto");
         }
 
-        return retorno; // True ou False 
+        return retorno; // True ou False
     }
 
-    public static void incluir (Labirinto labirinto) throws Exception
-    {
+    public static void incluir(Labirinto labirinto) throws Exception {
         if (labirinto == null)
-            throw new Exception ("O labirinto não foi fornecido...");
+            throw new Exception("O labirinto não foi fornecido...");
 
-        try
-        {
+        try {
             String sql;
 
-            sql = "INSERT INTO LABIRINTOS " +
-                  "(emailCliente,conteudo,dataCriacao, dataEdicao) " +
-                  "VALUES " +
-                  "(?,?,?,?)";
+            sql = "INSERT INTO LABIRINTOS " + "(emailCliente,conteudo,dataCriacao, dataEdicao) " + "VALUES "
+                    + "(?,?,?,?)";
 
-            BDSQLServer.COMANDO.prepareStatement (sql); // preparando tal comando (String sql)
+            BDSQLServer.COMANDO.prepareStatement(sql); // preparando tal comando (String sql)
 
             // Estamos substituindo as interogaçoes por valores de tipos especificos
-            BDSQLServer.COMANDO.setString (1, labirinto.getEmail());
-            // BDSQLServer.COMANDO.setData    (2, labirinto. ());
-            BDSQLServer.COMANDO.setString (2, labirinto.getConteudo());
-            BDSQLServer.COMANDO.setDate (3, labirinto.getDataCriacao());
-            BDSQLServer.COMANDO.setDate (4, labirinto.getDataEdicao());
+            BDSQLServer.COMANDO.setString(1, labirinto.getEmail());
+            // BDSQLServer.COMANDO.setData (2, labirinto. ());
+            BDSQLServer.COMANDO.setString(2, labirinto.getConteudo());
+            BDSQLServer.COMANDO.setDate(3, labirinto.getDataCriacao());
+            BDSQLServer.COMANDO.setDate(4, labirinto.getDataEdicao());
 
             // Executamos os comandos de sql, insert e delete
-            BDSQLServer.COMANDO.executeUpdate (); 
-            BDSQLServer.COMANDO.commit        (); 
-        }
-        catch (SQLException erro)
-        {
-			BDSQLServer.COMANDO.rollback();
-            throw new Exception ("Erro ao inserir labirinto");
+            BDSQLServer.COMANDO.executeUpdate();
+            BDSQLServer.COMANDO.commit();
+        } catch (SQLException erro) {
+            BDSQLServer.COMANDO.rollback();
+            throw new Exception("Erro ao inserir labirinto");
         }
     }
 
-    public static void alterar (Labirinto labirinto) throws Exception
-    {
-        if (labirinto==null)
-            throw new Exception ("Labirinto não fornecido");
+    public static void alterar(Labirinto labirinto) throws Exception {
+        if (labirinto == null)
+            throw new Exception("Labirinto não fornecido");
 
-        if (!cadastrado (labirinto.getId()))
-            throw new Exception ("Labirinto não cadastrado");
+        if (!cadastrado(labirinto.getId()))
+            throw new Exception("Labirinto não cadastrado");
 
-        try
-        {
+        try {
             String sql;
 
-            sql = "UPDATE Labirintos " +
-                  "SET dataEdicao = ?, " + // DEVE SER A NOVA DATA, A DATA ATUAL DA ATT
-                  "conteudo = ? " +
-                  "WHERE id = ?";
+            sql = "UPDATE Labirintos " + "SET dataEdicao = ?, " + // DEVE SER A NOVA DATA, A DATA ATUAL DA ATT
+                    "conteudo = ? " + "WHERE id = ?";
 
-            BDSQLServer.COMANDO.prepareStatement (sql);
+            BDSQLServer.COMANDO.prepareStatement(sql);
 
-            BDSQLServer.COMANDO.setDate (1, labirinto.getDataEdicao());
-            BDSQLServer.COMANDO.setString (2, labirinto.getConteudo());
-            BDSQLServer.COMANDO.setInt (3, labirinto.getId());
+            BDSQLServer.COMANDO.setDate(1, labirinto.getDataEdicao());
+            BDSQLServer.COMANDO.setString(2, labirinto.getConteudo());
+            BDSQLServer.COMANDO.setInt(3, labirinto.getId());
 
-            BDSQLServer.COMANDO.executeUpdate ();
-            BDSQLServer.COMANDO.commit        ();
-        }
-        catch (SQLException erro)
-        {
-			BDSQLServer.COMANDO.rollback();
-            throw new Exception ("Erro ao atualizar dados de labirinto");
+            BDSQLServer.COMANDO.executeUpdate();
+            BDSQLServer.COMANDO.commit();
+        } catch (SQLException erro) {
+            BDSQLServer.COMANDO.rollback();
+            throw new Exception("Erro ao atualizar dados de labirinto");
         }
     }
 
     // Método equivalente ao select
     /**
      * 
-     * @param indice corresponde ao indice do labirinto que eu quero retirar, selecionar.
+     * @param indice corresponde ao indice do labirinto que eu quero retirar,
+     *               selecionar.
      * @return
      * @throws Exception
      */
-    public static Labirinto getLabirinto (int id) throws Exception 
-    {
-        Labirinto labirinto = null; 
+    public static Labirinto getLabirinto(int id) throws Exception {
+        Labirinto labirinto = null;
 
-        try
-        {
+        try {
             String sql;
 
-            sql = "SELECT * " +
-                  "FROM Labirintos " +
-                  "WHERE id = ?";
+            sql = "SELECT * " + "FROM Labirintos " + "WHERE id = ?";
 
-            BDSQLServer.COMANDO.prepareStatement (sql);
+            BDSQLServer.COMANDO.prepareStatement(sql);
 
-            BDSQLServer.COMANDO.setInt (1, id);
+            BDSQLServer.COMANDO.setInt(1, id);
 
-            MeuResultSet resultado = (MeuResultSet)BDSQLServer.COMANDO.executeQuery (); // executeQuery para select e retorna objeto de meuResu
+            MeuResultSet resultado = (MeuResultSet) BDSQLServer.COMANDO.executeQuery(); // executeQuery para select e
+                                                                                        // retorna objeto de meuResu
 
             if (!resultado.first()) // first é metodo de meuResultSet -> primeira linha do resultado
-                throw new Exception ("Labirinto não cadastrado");
+                throw new Exception("Labirinto não cadastrado");
 
-            labirinto = new Labirinto (resultado.getInt("id"), resultado.getString("emailCliente"), resultado.getString("conteudo"), resultado.getDate("dataCriacao"), resultado.getDate("dataEdicao"));
-        }
-        catch (SQLException erro)
-        {
-            throw new Exception ("Erro ao procurar labirinto com tal indice");
+            labirinto = new Labirinto(resultado.getInt("id"), resultado.getString("emailCliente"),
+                    resultado.getString("conteudo"), resultado.getDate("dataCriacao"), resultado.getDate("dataEdicao"));
+        } catch (SQLException erro) {
+            throw new Exception("Erro ao procurar labirinto com tal indice");
         }
 
         return labirinto;
     }
 
+    public static boolean isInBanco(int id) throws Exception {
+        try {
+            String sql;
+
+            sql = "SELECT * " + "FROM Labirintos " + "WHERE id = ?";
+
+            BDSQLServer.COMANDO.prepareStatement(sql);
+
+            BDSQLServer.COMANDO.setInt(1, id);
+
+            MeuResultSet resultado = (MeuResultSet) BDSQLServer.COMANDO.executeQuery(); // executeQuery para select e
+                                                                                        // retorna objeto de meuResu
+
+            if (!resultado.first()) {
+                return false;
+            }
+            return true;
+        } catch (SQLException erro) {
+            throw new Exception("Erro ao procurar labirinto com tal indice");
+        }
+    }
+
     // Método para recuperar todos os labirintos
-    public static Vector<Labirinto> getLabirintos (String email) throws Exception
-    {
+    public static Vector<Labirinto> getLabirintos(String email) throws Exception {
         MeuResultSet resultado = null;
         Vector<Labirinto> vLabirintos = new Vector<Labirinto>();
 
-        try
-        {
+        try {
             String sql;
 
             sql = "SELECT * " + "FROM Labirintos " + "WHERE emailCliente = ?";
@@ -161,27 +160,25 @@ public class Labirintos {
             resultado = (MeuResultSet) BDSQLServer.COMANDO.executeQuery();
 
             if (!resultado.first()) {
-                throw new Exception ("Labirinto não cadastrado");
+                throw new Exception("Labirinto não cadastrado");
             } // first é metodo de meuResultSet -> primeira linha do resultado
 
             do {
-                vLabirintos.add(new Labirinto (resultado.getInt("id"), resultado.getString("emailCliente"), resultado.getString("conteudo"), resultado.getDate("dataCriacao"), resultado.getDate("dataEdicao")));
+                vLabirintos.add(new Labirinto(resultado.getInt("id"), resultado.getString("emailCliente"),
+                        resultado.getString("conteudo"), resultado.getDate("dataCriacao"),
+                        resultado.getDate("dataEdicao")));
             } while (resultado.next());
-        }
-        catch (SQLException erro)
-        {
-            throw new Exception ("Erro ao recuperar labirintos");
+        } catch (SQLException erro) {
+            throw new Exception("Erro ao recuperar labirintos");
         }
         return vLabirintos;
     }
 
-    public static Vector<Labirinto> getTodosLabirintos () throws Exception
-    {
+    public static Vector<Labirinto> getTodosLabirintos() throws Exception {
         MeuResultSet resultado = null;
         Vector<Labirinto> vLabirintos = new Vector<Labirinto>();
 
-        try
-        {
+        try {
             String sql;
 
             sql = "SELECT * " + "FROM Labirintos";
@@ -191,16 +188,16 @@ public class Labirintos {
             resultado = (MeuResultSet) BDSQLServer.COMANDO.executeQuery();
 
             if (!resultado.first()) {
-                throw new Exception ("Nenhum labirinto encontrado");
+                throw new Exception("Nenhum labirinto encontrado");
             } // first é metodo de meuResultSet -> primeira linha do resultado
 
             do {
-                vLabirintos.add(new Labirinto (resultado.getInt("id"), resultado.getString("emailCliente"), resultado.getString("conteudo"), resultado.getDate("dataCriacao"), resultado.getDate("dataEdicao")));
+                vLabirintos.add(new Labirinto(resultado.getInt("id"), resultado.getString("emailCliente"),
+                        resultado.getString("conteudo"), resultado.getDate("dataCriacao"),
+                        resultado.getDate("dataEdicao")));
             } while (resultado.next());
-        }
-        catch (SQLException erro)
-        {
-            throw new Exception ("Erro ao recuperar labirintos");
+        } catch (SQLException erro) {
+            throw new Exception("Erro ao recuperar labirintos");
         }
         return vLabirintos;
     }

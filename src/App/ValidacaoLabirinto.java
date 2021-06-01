@@ -16,7 +16,6 @@ public class ValidacaoLabirinto {
             contColunasPriLinha++;
         }
         colunas = contColunasPriLinha;
-        System.out.println("Número caracteres na primeira coluna: " + colunas);
 
         int contColunasPorLinha = 0;
         for (int i = 0; i < labirinto.length(); i++) {
@@ -30,7 +29,6 @@ public class ValidacaoLabirinto {
             }
             contColunasPorLinha++;
         }
-        System.out.println("Validada a quantidade de colunas.");
 
         // Redimenciona a matriz antiga e transforma as linhas do documento numa matriz.
         Character[][] novaMatriz = new Character[linhas][colunas];
@@ -49,13 +47,10 @@ public class ValidacaoLabirinto {
             matrizLabirinto[linha][coluna] = caracter;
             coluna++;
         }
-        System.out.println("Terminei de elaborar a matriz.");
 
         validarBordas();
 
         validarCaracteres();
-
-        System.out.println("Todas as validações concluídas com sucesso!");
     }
 
     public void validarArquivo(String nomeArquivo) throws Exception {
@@ -85,7 +80,6 @@ public class ValidacaoLabirinto {
                 }
             }
         }
-        System.out.println("Validação do número de linhas e colunas concluída com sucesso.");
         in.close();
 
         // Redimenciona a matriz antiga e transforma as linhas do documento numa matriz.
@@ -224,8 +218,6 @@ public class ValidacaoLabirinto {
             throw new Exception("Não existe a entrada do labirinto");
         if (contS < 1)
             throw new Exception("Não existe a saída do labirinto");
-
-        System.out.println("Validação das laterais concluída com sucesso.");
     }
 
     private void validarCaracteres() throws Exception {
@@ -253,8 +245,6 @@ public class ValidacaoLabirinto {
 
         if (contEntrada > 1 || contSaida > 1)
             throw new Exception("Existem entradas e/ou saídas no meio do labirinto!");
-
-        System.out.println("Validação dos caracteres concluída com sucesso.");
     }
 
     /**

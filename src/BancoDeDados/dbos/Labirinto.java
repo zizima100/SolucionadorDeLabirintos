@@ -7,12 +7,12 @@ public class Labirinto implements Cloneable, Serializable
 {
     private int id;
     private String emailCliente;
-    private String conteudo;
+    private String conteudo = "";
     private Date dataCriacao; 
     private Date dataEdicao;
 
-    public Labirinto (int id, String emailCliente, String conteudo, Date dataCriacao, Date dataEdicao) throws Exception
-    {
+    // Para a Classe Dao Labirintos
+    public Labirinto (int id, String emailCliente, String conteudo, Date dataCriacao, Date dataEdicao) {
         this.id = id;
         this.emailCliente = emailCliente;
         this.conteudo = conteudo;
@@ -20,14 +20,22 @@ public class Labirinto implements Cloneable, Serializable
         this.dataEdicao = dataEdicao;
     }
 
-    public Labirinto (String emailCliente, String conteudo, Date dataCriacao, Date dataEdicao) throws Exception
-    {
+    // public Labirinto (String emailCliente, String conteudo) throws Exception
+    // {
+    //     this.emailCliente = emailCliente;
+    //     this.conteudo = conteudo;
+    //     this.dataCriacao = new Date(System.currentTimeMillis());
+    //     this.dataEdicao = new Date(System.currentTimeMillis());
+    // }
+
+    // Novo labirinto (editor)
+    public Labirinto (String emailCliente) {
+        this.dataCriacao = new Date(System.currentTimeMillis());
+        this.dataEdicao = new Date(System.currentTimeMillis());
         this.emailCliente = emailCliente;
-        this.conteudo = conteudo;
-        this.dataCriacao = dataCriacao;
-        this.dataEdicao = dataEdicao;
     }
 
+    // Clone
     public Labirinto (Labirinto clonado) throws Exception
     {
         if (clonado == null) {
@@ -110,6 +118,18 @@ public class Labirinto implements Cloneable, Serializable
         Labirinto lab = (Labirinto)obj;
 
         if (this.id!=lab.id)
+            return false;
+
+        if (this.conteudo != lab.conteudo)
+            return false;
+
+        if (this.emailCliente != lab.emailCliente)
+            return false;
+
+        if (this.dataCriacao != lab.dataCriacao)
+            return false;
+
+        if (this.getDataEdicao() != lab.dataEdicao)
             return false;
 
         return true;

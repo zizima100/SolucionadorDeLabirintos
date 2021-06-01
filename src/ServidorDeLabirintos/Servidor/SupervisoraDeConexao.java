@@ -61,16 +61,15 @@ public class SupervisoraDeConexao extends Thread {
                     return;
                 }
                 else if (comunicado instanceof PedidoDeSalvamento) {
-                    // pegar do comunicado o vetor cheio de desenhos
-                    // e mais o nome do desenho e mais identificacao
-                    // cliente, e mandar pro BD usando o DAO e o DBO
-                    // que voce vai fazer
-                    // -----
-                    // desconectar o usuario
-                } else if (comunicado instanceof PedidoDeEdicao) {
-                    PedidoDeEdicao pedido = (PedidoDeEdicao)comunicado;
+                    PedidoDeSalvamento pedido = (PedidoDeSalvamento)comunicado;
 
-                    Labirintos.alterar(pedido.getLabEditado());
+                    Labirinto labParaSalvar = pedido.getlabirinto();
+
+                    if (Labirintos.isInBanco(labParaSalvar.getId())) {
+                        Labirintos.alterar(labParaSalvar);
+                    } else {
+                        Labirintos.incluir(labParaSalvar);
+                    }
                 } else if (comunicado instanceof PedidoDeLabirinto) {
                     PedidoDeLabirinto pedido = (PedidoDeLabirinto)comunicado;
 
@@ -84,12 +83,7 @@ public class SupervisoraDeConexao extends Thread {
 
                     usuario.receba(pedido);
                 } else if (comunicado instanceof PedidoParaSair) {
-                    // pegar do comunicado o nome do desenho e a identificacao
-                    // cliente, usar o DAO e DBO para recuperar do BD os dados,
-                    // preencher um objeto do tipo Desenho e vai enviar pro
-                    // cliente fazendo usuario.receba(desenho)
-                    // -----
-                    // desconecta o usuario
+                    usuario.adeus();
                 }
             }
         } catch (Exception erro) {

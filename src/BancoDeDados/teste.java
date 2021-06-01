@@ -10,11 +10,8 @@ public class teste {
     public static void main(String[] args) {
 
         try {
-            Vector<Labirinto> vLabirintos = Labirintos.getLabirintos("j@j.com");
-
-            for(int i = 0; i < vLabirintos.size(); i++) {
-                System.out.println(vLabirintos.get(i));
-            }
+            String teste = "3245\njkdnfksdfkjsdf";
+            System.out.println(teste.indexOf('\n'));
         } catch (Exception erro) {
             System.err.println(erro.getMessage());
         }
