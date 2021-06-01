@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import BancoDeDados.daos.*;
+import BancoDeDados.dbos.Labirinto;
 import ServidorDeLabirintos.Compartilhado.*;
 
 public class SupervisoraDeConexao extends Thread {
@@ -69,13 +70,7 @@ public class SupervisoraDeConexao extends Thread {
                 } else if (comunicado instanceof PedidoDeEdicao) {
                     PedidoDeEdicao pedido = (PedidoDeEdicao)comunicado;
 
-
-                    // pegar do comunicado o nome do desenho e a identificacao
-                    // cliente, usar o DAO e DBO para recuperar do BD os dados,
-                    // preencher um objeto do tipo Desenho e vai enviar pro
-                    // cliente fazendo usuario.receba(desenho)
-                    // -----
-                    // desconecta o usuario
+                    Labirintos.alterar(pedido.getLabEditado());
                 } else if (comunicado instanceof PedidoDeLabirinto) {
                     PedidoDeLabirinto pedido = (PedidoDeLabirinto)comunicado;
 

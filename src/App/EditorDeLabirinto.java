@@ -6,21 +6,30 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.sql.Date;
+import java.io.*;
+import java.net.*;
 import BancoDeDados.dbos.*;
+import ServidorDeLabirintos.Compartilhado.*;
+
 /**
  * UI do projeto.
  */
 public class EditorDeLabirinto {
+    //Interface
     JFrame janela = new JFrame("Editor de Labirintos");
     JButton botao[] = new JButton[5]; // criamos 5 botoes
     JTextArea visorErros = new JTextArea(); // text area para visor de error
     JTextArea editorDeTexto = new JTextArea(); // proprio editor de texto
+    Labirinto labirintoFinal = null;
+    String emailCliente = "";
+    Parceiro servidor = null;
     
     /**
      * metódo responsável em criar a janela, deixá-la centralizada, criar os botões, determinar suas caracteristicas estéticas 
      * e propriedades funcionais.
      */
-    public EditorDeLabirinto() {
+    public EditorDeLabirinto(Parceiro servidor ,String email) {
         JPanel botoes = new JPanel(); // jpanel recebe varios componentes layoutManager
         botoes.setLayout(new GridLayout(1, 5)); // criamos os icones de botao 
         String textosBotoes[] = { "Novo", "Importar", "Validar", "Solucionar", "Salvar" }; 
@@ -62,9 +71,13 @@ public class EditorDeLabirinto {
         //Faz botao salvar ficar disabled.
         editorDeTexto.addKeyListener(keyboardListener);
         botao[4].setEnabled(false);
+
+        //Recebimento das informações do cliente
+        this.emailCliente = email;
+        this.servidor = servidor;
     }
 
-    public EditorDeLabirinto(Labirinto labirintoImportado) {
+    public EditorDeLabirinto(Parceiro servidor, Labirinto labirintoImportado) {
         JPanel botoes = new JPanel(); // jpanel recebe varios componentes layoutManager
         botoes.setLayout(new GridLayout(1, 5)); // criamos os icones de botao 
         String textosBotoes[] = { "Novo", "Importar", "Validar", "Solucionar", "Salvar" }; 
@@ -89,9 +102,6 @@ public class EditorDeLabirinto {
         editorDeTexto.setFont(new Font("Monospaced", Font.PLAIN, 16));
         visorErros.setFont(new Font("Monospaced", Font.PLAIN, 20));
         visorErros.setForeground(Color.RED);
-
-        // Importa a string do labirinto improtado.
-        editorDeTexto.setText(labirintoImportado.getConteudo());
         
         // Faz a janela iniciar centralizada.
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -103,12 +113,18 @@ public class EditorDeLabirinto {
         // Propriedades funcionais da janela.
         this.janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         visorErros.setEditable(false); 
-        JScrollPane sp = new JScrollPane(editorDeTexto); // Scroll do Editor
-        this.janela.getContentPane().add(sp);
+        // ! ATENÇÃO ! - SCROLL ESTÁ DANDO ERRO. VERIFICAR POR ÚLTIMO SE SOBRAR TEMPO.
+        // JScrollPane sp = new JScrollPane(editorDeTexto); // Scroll do Editor
+        // this.janela.getContentPane().add(sp);
         
         //Faz botao salvar ficar disabled.
         editorDeTexto.addKeyListener(keyboardListener);
         botao[4].setEnabled(false);
+
+        // Importa infos cliente.
+        editorDeTexto.setText(labirintoImportado.getConteudo());
+        this.emailCliente = labirintoImportado.getEmail();
+        this.servidor = servidor;
     }
 
     class KeyboardListener implements KeyListener {
@@ -243,28 +259,50 @@ public class EditorDeLabirinto {
             removerAsteriscos();
 
             int qntLinhas = contLinhas();
-            String labirintoSalvar = qntLinhas + "\n" + editorDeTexto.getText();
+            String conteudoLabirinto = qntLinhas + "\n" + editorDeTexto.getText();
 
-            final JFileChooser fc = new JFileChooser();
-            fc.setCurrentDirectory(new File(System.getProperty("user.home")));
-
-            int result = fc.showSaveDialog(null);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File file = fc.getSelectedFile();
-                if (file == null) {
-                    return;
-                }
-                if (!file.getName().toLowerCase().endsWith(".txt")) {
-                    file = new File(file.getParentFile(), file.getName() + ".txt");
-                }
+            if (labirintoFinal == null) {
                 try {
-                    FileWriter fw = new FileWriter(file);
-                    fw.write(labirintoSalvar);
-                    fw.close();
+                    labirintoFinal = 
+                    new Labirinto(emailCliente, conteudoLabirinto, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()));
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            } else {
+                try {
+                    labirintoFinal.setConteudo(conteudoLabirinto);
+                    labirintoFinal.setDataEdicao(new Date(System.currentTimeMillis()));
                 } catch (Exception e) {
                     System.err.println(e.getMessage());
                 }
             }
+
+            try {
+                servidor.receba(new PedidoDeEdicao(labirintoFinal));
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+
+            // final JFileChooser fc = new JFileChooser();
+            // fc.setCurrentDirectory(new File(System.getProperty("user.home")));
+
+            // int result = fc.showSaveDialog(null);
+            // if (result == JFileChooser.APPROVE_OPTION) {
+            //     File file = fc.getSelectedFile();
+            //     if (file == null) {
+            //         return;
+            //     }
+            //     if (!file.getName().toLowerCase().endsWith(".txt")) {
+            //         file = new File(file.getParentFile(), file.getName() + ".txt");
+            //     }
+            //     try {
+            //         FileWriter fw = new FileWriter(file);
+            //         fw.write(labirintoSalvar);
+            //         fw.close();
+            //     } catch (Exception e) {
+            //         System.err.println(e.getMessage());
+            //     }
+            // }
         }
 
         private int contLinhas() {

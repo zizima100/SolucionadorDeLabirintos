@@ -1,8 +1,9 @@
 package BancoDeDados.dbos;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Labirinto implements Cloneable
+public class Labirinto implements Cloneable, Serializable
 {
     private int id;
     private String emailCliente;
@@ -86,7 +87,7 @@ public class Labirinto implements Cloneable
     {
         String ret="";
 
-        ret+="Indice: "+this.id+"\n";
+        ret+="ID: "+this.id+"\n";
         ret+="Email: "+this.emailCliente+"\n";
         ret+="DataCriacao: "+this.dataCriacao+"\n";
         ret+="DataEdicao: "+this.dataEdicao +"\n";

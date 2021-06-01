@@ -93,7 +93,6 @@ public class Cliente {
 				System.err.println("E-mail inválido!");
 				continue;
 			}
-
 		} while (email.indexOf('@') == -1 || email.length() < 7);
 
 		char opcao = ' ';
@@ -122,7 +121,7 @@ public class Cliente {
 					// que devemos remover o botão importar.
 					System.out.print("Você selecionou a opção de criar um novo labirinto!");
 					try {
-						new EditorDeLabirinto();
+						new EditorDeLabirinto(servidor, email);
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 						continue;
@@ -142,24 +141,23 @@ public class Cliente {
 							comunicado = (Comunicado) servidor.espie();
 						} while (!(comunicado instanceof PedidoDeLabirintos));
 						PedidoDeLabirintos pedido = (PedidoDeLabirintos) servidor.envie();
-						
+
 						Vector<Labirinto> vLabirintos = pedido.getLabirintos();
 						if (vLabirintos.size() > 0) {
 							for (int i = 0; i < vLabirintos.size(); i++) {
 								System.out.println(vLabirintos.get(i));
 								idsDisponiveis.add(vLabirintos.get(i).getId());
 							}
-	
 							System.out.println("Insira o valor do ID do labirinto que deseja editar.");
-							System.out.println("ID: ");
-	
+							System.out.printf("ID: ");
+
 							try {
 								opcaoID = Teclado.getUmInt();
 							} catch (Exception erro) {
 								System.err.println("ID invalido!\n");
 								continue;
 							}
-	
+
 							if (idsDisponiveis.indexOf(opcaoID) == -1) {
 								System.err.println("ID invalido!\n");
 							}
@@ -167,9 +165,9 @@ public class Cliente {
 							System.out.println("Nenhum Labirinto registrado neste e-mail. . .");
 							break;
 						}
-
 					} while (idsDisponiveis.indexOf(opcaoID) == -1);
 
+					// Abrir editor com o labirinto selecionado.
 					servidor.receba(new PedidoDeLabirinto(opcaoID));
 					Comunicado comunicado = null;
 					do {
@@ -179,7 +177,8 @@ public class Cliente {
 
 					Labirinto labirintoImportado = resultado.getLabirinto();
 
-					new EditorDeLabirinto(labirintoImportado);
+					System.out.println(labirintoImportado.getConteudo());
+					new EditorDeLabirinto(servidor, labirintoImportado);
 				}
 			} catch (Exception erro) {
 				System.err.println("Erro de comunicacao com o servidor;");

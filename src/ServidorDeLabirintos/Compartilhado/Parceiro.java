@@ -31,7 +31,6 @@ public class Parceiro
         if (transmissor==null) {
             throw new Exception ("Transmissor ausente");
         }
-
         this.conexao = conexao;
         this.receptor = receptor;
         this.transmissor = transmissor;
@@ -55,18 +54,16 @@ public class Parceiro
         try
         {
             this.mutEx.acquireUninterruptibly();
-            System.out.println("Peguei um ponto do semáforo.");
             if (this.proximoComunicado==null) {
-                System.out.println("Estou tentando ler o objeto no espie.");
                 this.proximoComunicado = (Comunicado)this.receptor.readObject();
             }
             this.mutEx.release();
-            System.out.println("Liberei o ponto do semáforo.");
             return this.proximoComunicado;
         }
         catch (Exception erro)
         {
-            throw new Exception ("Erro de recepcao");
+            erro.printStackTrace();
+            throw new Exception ("Erro de recepcao espie");
         }
     }
 
