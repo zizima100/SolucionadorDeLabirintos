@@ -41,18 +41,14 @@ public class Solucionador {
      */
     public void solucionar() throws Exception {
         posInicio();
-        // System.out.printf("\n\nCoordenada Inicial: (%d, %d).", atual.getLinha(),
-        // atual.getColuna());
-
         progressivo();
-
         // Bloco printa o labirinto solucionado.
-        for (int i = 0; i < 5; i++) {
-            System.out.printf("\n\n\n\n\n");
-        }
-        System.out.printf("Labirinto Solucionado:\n");
+        // for (int i = 0; i < 5; i++) {
+        //     System.out.printf("\n\n\n\n\n");
+        // }
+        // System.out.printf("Labirinto Solucionado:\n");
 
-        printLabirinto();
+        // printLabirinto();
     }
 
     private void progressivo() throws Exception {

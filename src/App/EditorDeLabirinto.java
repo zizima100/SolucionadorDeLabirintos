@@ -28,7 +28,7 @@ public class EditorDeLabirinto {
     public EditorDeLabirinto(Labirinto labirintoImportado) {
         JPanel botoes = new JPanel(); // jpanel recebe varios componentes layoutManager
         botoes.setLayout(new GridLayout(1, 5)); // criamos os icones de botao 
-        String textosBotoes[] = { "Novo", "Importar", "Validar", "Solucionar", "Salvar" }; 
+        String textosBotoes[] = { "Novo", "Importar", "Validar", "Solucionar", "Salvar E Sair" }; 
         
         TratadorDeMouse tratadorDeMouse = new TratadorDeMouse();
         KeyboardListener keyboardListener = new KeyboardListener();
@@ -59,11 +59,8 @@ public class EditorDeLabirinto {
         this.janela.setLocation(x, y);
         
         // Propriedades funcionais da janela.
-        this.janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // this.janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         visorErros.setEditable(false); 
-        // ! ATENÇÃO ! - SCROLL ESTÁ DANDO ERRO. VERIFICAR POR ÚLTIMO SE SOBRAR TEMPO.
-        // JScrollPane sp = new JScrollPane(editorDeTexto); // Scroll do Editor
-        // this.janela.getContentPane().add(sp);
         
         //Faz botao salvar ficar disabled.
         editorDeTexto.addKeyListener(keyboardListener);
@@ -71,7 +68,6 @@ public class EditorDeLabirinto {
 
         // Importa infos cliente.
         this.labirintoFinal = labirintoImportado;
-
         String conteudoImportado = labirintoImportado.getConteudo();
         editorDeTexto.setText(conteudoImportado.substring(conteudoImportado.indexOf('\n') + 1, conteudoImportado.length()));
     }
@@ -217,6 +213,7 @@ public class EditorDeLabirinto {
             try {
                 labirintoFinal.setConteudo(conteudoLabirinto);
                 labirintoFinal.setDataEdicao(new Date(System.currentTimeMillis()));
+                janela.dispose();
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
@@ -277,7 +274,7 @@ public class EditorDeLabirinto {
                     break;
                 case "Solucionar": botaoSolucionar();
                     break;
-                case "Salvar": botaoSalvar();
+                case "Salvar E Sair": botaoSalvar();
                     break;
                 }
             } catch (Exception erro) {

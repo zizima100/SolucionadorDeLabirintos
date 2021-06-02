@@ -123,14 +123,13 @@ public class Cliente {
 						EditorDeLabirinto editor = new EditorDeLabirinto(novoLabirinto);
 
 						// Bloco que verifica se houve salvamento do labirinto editado no editor.
-						Labirinto LabAntesDoSave = (Labirinto)editor.getLabirinto().clone();
+						Labirinto LabAntesDoSave = (Labirinto)novoLabirinto.clone();
 						do {
-							if (!LabAntesDoSave.equals(editor.getLabirinto())) {
-								System.out.println("Vou salvar o labirinto!"); // Substituir pelo pedido de salvamento.
+							if (LabAntesDoSave.getConteudo() != editor.getLabirinto().getConteudo()) {
+								System.out.println("Novo Labirinto Salvo!");
 								servidor.receba(new PedidoDeSalvamento(editor.getLabirinto()));
-								LabAntesDoSave = (Labirinto)editor.getLabirinto().clone();
 							}
-						} while (true);
+						} while (LabAntesDoSave.getConteudo() == editor.getLabirinto().getConteudo());
 					} catch (Exception e) {
 						System.err.println(e.getMessage());
 						continue;
@@ -188,12 +187,11 @@ public class Cliente {
 					// Bloco que verifica se houve salvamento do labirinto editado no editor.
 					Labirinto LabAntesDoSave = (Labirinto)labirintoImportado.clone();
 					do {
-						if (!LabAntesDoSave.equals(editor.getLabirinto())) {
-							System.out.println("Vou salvar o labirinto!"); // Substituir pelo pedido de salvamento.
+						if (LabAntesDoSave.getConteudo() != editor.getLabirinto().getConteudo()) {
+							System.out.println("Edição do labirinto salva!");
 							servidor.receba(new PedidoDeSalvamento(editor.getLabirinto()));
-							LabAntesDoSave = (Labirinto)editor.getLabirinto().clone();
 						}
-					} while (true);
+					} while (LabAntesDoSave.getConteudo() == editor.getLabirinto().getConteudo());
 				}
 			} catch (Exception erro) {
 				System.err.println("Erro de comunicacao com o servidor;");
