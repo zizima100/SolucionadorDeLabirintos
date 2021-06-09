@@ -59,7 +59,7 @@ public class EditorDeLabirinto {
         this.janela.setLocation(x, y);
         
         // Propriedades funcionais da janela.
-        // this.janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         visorErros.setEditable(false); 
         
         //Faz botao salvar ficar disabled.

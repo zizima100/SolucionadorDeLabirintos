@@ -14,7 +14,7 @@ import java.io.*;
  * usuário ou por ordem do servidor.
  */
 public class Cliente {
-	public static final String HOST_PADRAO = "localhost";
+	public static final String HOST_PADRAO = "25.8.99.154";
 	public static final int PORTA_PADRAO = 3000; // Não devemos mudar essa porta.
 
 	public static void main(String[] args) {
@@ -203,8 +203,11 @@ public class Cliente {
 
 		try {
 			servidor.receba(new PedidoParaSair());
-		} catch (Exception erro) {
 		}
+		 catch (Exception erro) {
+		}
+
+		tratadoraDeComunicadoDeDesligamento.stop();
 
 		System.out.println("Obrigado por usar este programa!");
 		System.exit(0);
