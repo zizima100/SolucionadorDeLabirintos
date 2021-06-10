@@ -101,6 +101,7 @@ public class Cliente {
 
 		char opcao = ' ';
 		do {
+			Vector<Labirinto> vLabirintos = new Vector<Labirinto>();
 			System.out.println("O que deseja fazer?");
 			System.out.println("[ N ] - Criar um novo labirinto.");
 			System.out.println("[ E ] - Editar um labirinto existente.");
@@ -142,7 +143,7 @@ public class Cliente {
 					int opcaoID = 0;
 					Vector<Integer> idsDisponiveis = new Vector<Integer>();
 					do {
-						System.out.println("Os labirintos disponíveis são:");
+						System.out.println("Os labirintos disponíveis são:\n------------------------------------------------\n");
 
 						servidor.receba(new PedidoDeLabirintos(email));
 						Comunicado comunicado = null;
@@ -151,7 +152,7 @@ public class Cliente {
 						} while (!(comunicado instanceof PedidoDeLabirintos));
 						PedidoDeLabirintos pedido = (PedidoDeLabirintos) servidor.envie();
 
-						Vector<Labirinto> vLabirintos = pedido.getLabirintos();
+						vLabirintos = pedido.getLabirintos();
 						if (vLabirintos.size() > 0) {
 							for (int i = 0; i < vLabirintos.size(); i++) {
 								System.out.println(vLabirintos.get(i));
@@ -175,6 +176,9 @@ public class Cliente {
 							break;
 						}
 					} while (idsDisponiveis.indexOf(opcaoID) == -1);
+					if (vLabirintos.size() <= 0) {
+						continue;
+					}
 
 					// Pegando Labirinto do Banco.
 					servidor.receba(new PedidoDeLabirinto(opcaoID));

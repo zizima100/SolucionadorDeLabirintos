@@ -192,7 +192,8 @@ public class Labirintos {
             resultado = (MeuResultSet) BDSQLServer.COMANDO.executeQuery();
 
             if (!resultado.first()) {
-                throw new Exception("Labirinto não cadastrado");
+                return vLabirintos;
+                // throw new Exception("Labirinto não cadastrado");
             } // first é metodo de meuResultSet -> primeira linha do resultado
 
             do {
