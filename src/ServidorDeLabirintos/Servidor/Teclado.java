@@ -4,17 +4,22 @@ import java.io.*;
 
 /**
  * Permite a digitação através de comandos de uma linha na parte do servidor.
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
 public class Teclado
 {
-    private static BufferedReader teclado =
-                   new BufferedReader (
-                   new InputStreamReader (
-                   System.in));
+    private static BufferedReader teclado = new BufferedReader (new InputStreamReader (System.in));
 
+    /**
+     * Lê uma string do teclado do servidor
+     * @return retorna uma string
+     */
     public static String getUmString ()
     {
-        String ret=null;
+        String ret = null;
 
         try
         {
@@ -26,6 +31,11 @@ public class Teclado
         return ret;
     }
 
+    /**
+     * Transforma em Byte o que foi lido na linha do teclado do servidor
+     * @return retorna um byte da linha lida 
+     * @throws Exception
+     */
     public static byte getUmByte () throws Exception
     {
         byte ret=(byte)0;
@@ -44,6 +54,11 @@ public class Teclado
         return ret;
     }
  
+    /**
+     * Transforma em short o que foi lido na linha do teclado do servidor
+     * @return retorna um short da linha lida
+     * @throws Exception
+     */
     public static short getUmShort () throws Exception
     {
         short ret=(short)0;
@@ -62,6 +77,11 @@ public class Teclado
         return ret;
     }
 
+    /**
+     * Transforma em integer o que foi lido na linha do teclado do servidor 
+     * @return retorna um valor inteiro lido
+     * @throws Exception
+     */
     public static int getUmInt () throws Exception
     {
         int ret=0;
@@ -80,6 +100,11 @@ public class Teclado
         return ret;
     }
 
+    /**
+     * Transforma em long o que foi lido na linha do teclado do servidor
+     * @return retorna um valor long lido
+     * @throws Exception
+     */
     public static long getUmLong () throws Exception
     {
       //long ret=(long)0;
@@ -100,6 +125,11 @@ public class Teclado
         return ret;
     }
 
+    /**
+     * Transforma em float o que foi lido na linha do teclado do servidor
+     * @return retorna um valor float lido
+     * @throws Exception
+     */
     public static float getUmFloat () throws Exception
     {
       //float ret=0;
@@ -120,6 +150,11 @@ public class Teclado
         return ret;
     }
 
+    /**
+     * Transforma em double o que foi lido na linha do teclado do servidor
+     * @return retorna um double lido 
+     * @throws Exception
+     */
     public static double getUmDouble () throws Exception
     {
       //double ret=0;
@@ -141,6 +176,11 @@ public class Teclado
         return ret;
     }
 
+    /**
+     * Transforma em char o que foi lido na linha do teclado do servidor
+     * @return retorna um char lido 
+     * @throws Exception
+     */
     public static char getUmChar () throws Exception
     {
         char ret=' ';
@@ -163,6 +203,11 @@ public class Teclado
         return ret;
     }
 
+    /**
+     * Transforma em bookean o que foi lido na linha do teclado do servidor
+     * @return retorna um boolean lido 
+     * @throws Exception
+     */
     public static boolean getUmBoolean () throws Exception
     {
         boolean ret=false;

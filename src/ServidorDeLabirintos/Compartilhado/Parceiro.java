@@ -5,6 +5,13 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.Semaphore;
 
+/**
+ * Representa o servidor do cliente ou o cliente conectado no servidor (A depender de qual classe está sendo instânciado)
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
+ */
 public class Parceiro
 {
     private Socket conexao;
@@ -36,6 +43,11 @@ public class Parceiro
         this.transmissor = transmissor;
     }
 
+    /**
+     * Faz com que o parceiro desse programa receba um comunicado
+     * @param x comunicado 
+     * @throws Exception
+     */
     public void receba (Comunicado x) throws Exception
     {
         try
@@ -49,6 +61,11 @@ public class Parceiro
         }
     }
 
+    /**
+     * Faz com que o programa atual espie o próximo comunicado do parceiro 
+     * @return retorna o próximo comunicado
+     * @throws Exception
+     */
     public Comunicado espie () throws Exception
     {
         try
@@ -67,6 +84,11 @@ public class Parceiro
         }
     }
 
+    /**
+     * Faz com que o parceiro do programa atual envie o próximo comunicado  
+     * @return retorna o próximo comunicado 
+     * @throws Exception
+     */
     public Comunicado envie () throws Exception
     {
         try
@@ -84,6 +106,10 @@ public class Parceiro
         }
     }
 
+    /**
+     * Encerra a conexão do parceiro com o programa atual
+     * @throws Exception
+     */
     public void adeus () throws Exception
     {
         try

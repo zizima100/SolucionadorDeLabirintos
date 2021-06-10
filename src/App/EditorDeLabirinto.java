@@ -12,6 +12,10 @@ import ServidorDeLabirintos.Compartilhado.*;
 
 /**
  * UI do projeto.
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
 public class EditorDeLabirinto {
     //Interface
@@ -217,27 +221,6 @@ public class EditorDeLabirinto {
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
-
-            // final JFileChooser fc = new JFileChooser();
-            // fc.setCurrentDirectory(new File(System.getProperty("user.home")));
-
-            // int result = fc.showSaveDialog(null);
-            // if (result == JFileChooser.APPROVE_OPTION) {
-            //     File file = fc.getSelectedFile();
-            //     if (file == null) {
-            //         return;
-            //     }
-            //     if (!file.getName().toLowerCase().endsWith(".txt")) {
-            //         file = new File(file.getParentFile(), file.getName() + ".txt");
-            //     }
-            //     try {
-            //         FileWriter fw = new FileWriter(file);
-            //         fw.write(labirintoSalvar);
-            //         fw.close();
-            //     } catch (Exception e) {
-            //         System.err.println(e.getMessage());
-            //     }
-            // }
         }
 
         private int contLinhas() {
@@ -258,6 +241,7 @@ public class EditorDeLabirinto {
             }
             editorDeTexto.setText(new String(labirinto));
         }
+
         /**
          * Responsável por tomar alguma decisão, caso algum dos botões seja clicado
          */

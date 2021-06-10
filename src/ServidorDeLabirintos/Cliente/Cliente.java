@@ -12,6 +12,10 @@ import java.io.*;
  * Classe responsável por instanciar o cliente. Esse cliente é capaz de realizar
  * operações ao se comunicar com o servidor e pode ser terminado por ordem do
  * usuário ou por ordem do servidor.
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
 public class Cliente {
 	public static final String HOST_PADRAO = "25.8.99.154";

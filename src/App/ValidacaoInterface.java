@@ -1,4 +1,13 @@
 package App;
+
+
+/**
+ * Classe que valida o labirinto aberto no editor de texto    
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
+ */
 public class ValidacaoInterface {
     private Integer linhas;
     private Integer colunas;

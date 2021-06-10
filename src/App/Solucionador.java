@@ -6,6 +6,10 @@ import App.EstruturasDeDados.*;
  * <p>
  * Caso o contrário, erros podem acontecer.
  * <p>
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
 public class Solucionador {
     private Character[][] matrizLabirinto;

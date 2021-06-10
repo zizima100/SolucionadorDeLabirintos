@@ -7,11 +7,24 @@ import BancoDeDados.daos.*;
 import BancoDeDados.dbos.Labirinto;
 import ServidorDeLabirintos.Compartilhado.*;
 
+/**
+ * Thread responsável por aguardar pedidos dos clientes e tomar ações a depender do pedido recebido
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
+ */
 public class SupervisoraDeConexao extends Thread {
     private Parceiro usuario;
     private Socket conexao;
     private ArrayList<Parceiro> usuarios;
 
+    /**
+     * Cria conexão entre cliente e servidor
+     * @param conexao é o socket criado na aceitadoraDeConexao 
+     * @param usuarios do servidor contidos em um ArrayList de parceiros
+     * @throws Exception 
+     */
     public SupervisoraDeConexao(Socket conexao, ArrayList<Parceiro> usuarios) throws Exception {
         if (conexao == null) {
             throw new Exception("Conexao ausente");
@@ -24,6 +37,9 @@ public class SupervisoraDeConexao extends Thread {
         this.usuarios = usuarios;
     }
 
+    /**
+     * Aguarda pedidos dos clientes e toma ações a depender do pedido recebido 
+     */
     public void run() {
         ObjectOutputStream transmissor;
         try {

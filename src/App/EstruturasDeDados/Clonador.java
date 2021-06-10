@@ -2,6 +2,13 @@ package App.EstruturasDeDados;
 
 import java.lang.reflect.*;
 
+/**
+ * Classe utilizada para clonar um objeto
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
+ */
 public class Clonador<X> {
     public X clone(X x) {
         // assim obtemos a classe da instancia no objeto

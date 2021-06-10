@@ -5,8 +5,11 @@ package App.EstruturasDeDados;
  *
  * Instâncias desta classe permitem que as operações padrão de uma pilha seja
  * feita.
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
-
 public class Pilha<valorGenerico> implements Cloneable// Classe Pilha que pode receber qualquer tipo de valor
 {
     private Object[] elemento;

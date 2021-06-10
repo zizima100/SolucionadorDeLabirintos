@@ -13,11 +13,9 @@ public class MeuStatement implements Statement
     protected Connection conexao=null;
     protected Statement  comando=null;
 
-    protected ArrayList<Statement> comandos =
-            new ArrayList<Statement> ();
+    protected ArrayList<Statement> comandos = new ArrayList<Statement> ();
 
-    protected ArrayList<MeuResultSet> resultados =
-              new ArrayList<MeuResultSet> ();
+    protected ArrayList<MeuResultSet> resultados = new ArrayList<MeuResultSet> ();
 
     public MeuStatement (String drv,
                          String strCon,

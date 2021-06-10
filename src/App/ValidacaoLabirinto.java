@@ -2,11 +2,24 @@ package App;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+/**
+ * Classe utilizada para validar um labirinto
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
+ */
 public class ValidacaoLabirinto {
     private Integer linhas;
     private Integer colunas;
     private Character[][] matrizLabirinto;
 
+    /**
+     * Valida a consistência do labirinto 
+     * @param labirinto
+     * @param qntLinhas
+     * @throws Exception
+     */
     public void validar(String labirinto, int qntLinhas) throws Exception {
         linhas = qntLinhas;
 
@@ -53,6 +66,11 @@ public class ValidacaoLabirinto {
         validarCaracteres();
     }
 
+    /**
+     * Valida se o arquivo é consistente, ou seja: apresenta a quantidade de linhas, na sua primeira linha
+     * @param nomeArquivo nome do arquivo 
+     * @throws Exception
+     */
     public void validarArquivo(String nomeArquivo) throws Exception {
         int contador = 0; // Aponta que linha está sendo lida (Linha começa por 1)
 

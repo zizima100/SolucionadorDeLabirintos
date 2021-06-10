@@ -11,10 +11,14 @@ import BancoDeDados.dbos.*;
  * <p>
  * Enviado o labirinto editado no cliente para o servidor armazenar.
  * </p>
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
 public class PedidoDeSalvamento extends Comunicado {
     Labirinto labirinto = null;
-
+    
     public PedidoDeSalvamento(Labirinto labirinto) {
         this.labirinto = labirinto;
     }

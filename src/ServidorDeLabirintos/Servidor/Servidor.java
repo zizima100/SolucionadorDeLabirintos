@@ -4,6 +4,13 @@ import java.util.*;
 
 import ServidorDeLabirintos.Compartilhado.*;
 
+/**
+ * Servidor responsável por aguardar contato de clientes (parceiros) com mesmo host 
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
+ */
 public class Servidor {
     public static String PORTA_PADRAO = "3000";
 

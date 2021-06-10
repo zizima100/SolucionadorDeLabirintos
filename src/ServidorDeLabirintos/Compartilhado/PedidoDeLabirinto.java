@@ -12,6 +12,10 @@ import BancoDeDados.dbos.*;
  * </p>
  * 
  * Servidor responde mandando objeto da classe Resultado para o cliente
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
 public class PedidoDeLabirinto extends Comunicado {
     // Provavelmente precisamos apenas de um atributo chamado ID que irá armazenar o

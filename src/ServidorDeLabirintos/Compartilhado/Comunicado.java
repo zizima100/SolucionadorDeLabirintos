@@ -9,6 +9,10 @@ import java.io.Serializable;
  * Objetos dessa classe devem ser ocos, ou seja, não devem conter nenhum
  * atributo ou método.
  * </p>
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
 public class Comunicado implements Serializable {
 }

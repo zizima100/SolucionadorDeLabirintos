@@ -10,6 +10,10 @@ package ServidorDeLabirintos.Compartilhado;
  * </p>
  * 
  * Essa classe deve ser oca.
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
 public class ComunicadoDeDesligamento extends Comunicado {
     // Mensagem para todos clientes, notificando que o servidor está encerrando

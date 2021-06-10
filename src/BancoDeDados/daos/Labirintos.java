@@ -7,8 +7,21 @@ import BancoDeDados.*;
 import BancoDeDados.core.*;
 import BancoDeDados.dbos.*;
 
+/**
+ * Classe utilizada para realizar operações básicas, relacionadas ao labirinto, no banco de dados 
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
+ */
 public class Labirintos {
 
+    /**
+     * Executa queries, que procuram um labirinto especifico
+     * @param id do labirinto que é desejado ser aberto
+     * @return retorna o primeiro valor encontrado, que é o labirinto da querie
+     * @throws Exception retorna a excessão caso o id do labirinto não seja encontrado 
+     */
     public static boolean cadastrado(int id) throws Exception {
         boolean retorno = false;
 
@@ -31,6 +44,11 @@ public class Labirintos {
         return retorno; // True ou False
     }
 
+    /**
+     * Inclusão do labirinto no banco de dados
+     * @param labirinto que será adicionado no banco de dados 
+     * @throws Exception retorna a excessão caso o labirinto não seja fornecido 
+     */
     public static void incluir(Labirinto labirinto) throws Exception {
         if (labirinto == null)
             throw new Exception("O labirinto não foi fornecido...");
@@ -59,6 +77,11 @@ public class Labirintos {
         }
     }
 
+    /**
+     * Altera o conteúdo e data de edição de um labirinto já existe
+     * @param labirinto que será alterado
+     * @throws Exception retorna excessão caso o labirinto não seja fornecido
+     */
     public static void alterar(Labirinto labirinto) throws Exception {
         if (labirinto == null)
             throw new Exception("Labirinto não fornecido");
@@ -88,11 +111,11 @@ public class Labirintos {
 
     // Método equivalente ao select
     /**
-     * 
+     * Seleciona determinado labirinto de acordo com o id correspondente
      * @param indice corresponde ao indice do labirinto que eu quero retirar,
      *               selecionar.
-     * @return
-     * @throws Exception
+     * @return retorna o labirinto correspondente ao id do parâmetro 
+     * @throws Exception retorna uma excessão caso não seja encontrado labirinto com tal indice 
      */
     public static Labirinto getLabirinto(int id) throws Exception {
         Labirinto labirinto = null;
@@ -121,6 +144,9 @@ public class Labirintos {
         return labirinto;
     }
 
+    /**\
+     * Verifica se o labirinto se encontra no banco de dados
+     */
     public static boolean isInBanco(int id) throws Exception {
         try {
             String sql;
@@ -144,6 +170,12 @@ public class Labirintos {
     }
 
     // Método para recuperar todos os labirintos
+    /**
+     * Retorna todos os labirintos inseridos dentro de um determinado email 
+     * @param email no qual queremos listar todos os labirintos cadastrados
+     * @return retorna um vetor de labirinto
+     * @throws Exception
+     */
     public static Vector<Labirinto> getLabirintos(String email) throws Exception {
         MeuResultSet resultado = null;
         Vector<Labirinto> vLabirintos = new Vector<Labirinto>();
@@ -174,6 +206,11 @@ public class Labirintos {
         return vLabirintos;
     }
 
+    /**
+     * Retorna todos os labirintos inseridos da tabela do banco de dados, portanto: todos os labirintos
+     * @return retorna um vetor contendo todos os labirintos
+     * @throws Exception
+     */
     public static Vector<Labirinto> getTodosLabirintos() throws Exception {
         MeuResultSet resultado = null;
         Vector<Labirinto> vLabirintos = new Vector<Labirinto>();

@@ -2,11 +2,14 @@ package BancoDeDados;
 
 import BancoDeDados.core.*;
 import BancoDeDados.daos.*;
-// import java.sql.DatabaseMetaData;
-// import java.sql.Connection;
-// import java.sql.DriverManager;
-// import java.sql.SQLException;
 
+/**
+ * Conexão com o banco de dados SQL Server
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
+ */
 public class BDSQLServer
 {
     public static final MeuPreparedStatement COMANDO; // Constante Comando, de MeuPreparedStatement

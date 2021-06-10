@@ -6,8 +6,11 @@ package App.EstruturasDeDados;
  * Os elementos desse vetor correspondem à linha e à coluna de uma matriz,
  * respectivamente.
  * <p>
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
-
 public class Coordenada implements Cloneable {
     private Integer[] elementos = new Integer[2];
 

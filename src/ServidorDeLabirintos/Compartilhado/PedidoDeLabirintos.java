@@ -15,6 +15,10 @@ import java.util.Vector;
  * </p>
  * 
  * Servidor responde mandando vetor de objetos labirintos para o cliente
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
  */
 public class PedidoDeLabirintos extends Comunicado {
     String email;

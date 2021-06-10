@@ -3,6 +3,13 @@ package BancoDeDados.dbos;
 import java.io.Serializable;
 import java.sql.Date;
 
+/**
+ * Instância um labirinto a partir das informações passadas pelos parâmetros dos construtores 
+ * @author Julio Faundes
+ * @author Diego Barbosa
+ * @author Vinicius Zacheu 
+ * @since 2021
+ */
 public class Labirinto implements Cloneable, Serializable
 {
     private int id;
@@ -12,6 +19,14 @@ public class Labirinto implements Cloneable, Serializable
     private Date dataEdicao;
 
     // Para a Classe Dao Labirintos
+    /**
+     * Construct normalmente utilizado para criar labirintos a partir de labirintos já existentes no banco de dados
+     * @param id do labirinto
+     * @param emailCliente email do cliente que registrou tal labirinto
+     * @param conteudo dentro do labirinto
+     * @param dataCriacao de quando o labirinto foi criado
+     * @param dataEdicao de quando houve edição no labirinto
+     */
     public Labirinto (int id, String emailCliente, String conteudo, Date dataCriacao, Date dataEdicao) {
         this.id = id;
         this.emailCliente = emailCliente;
@@ -20,22 +35,22 @@ public class Labirinto implements Cloneable, Serializable
         this.dataEdicao = dataEdicao;
     }
 
-    // public Labirinto (String emailCliente, String conteudo) throws Exception
-    // {
-    //     this.emailCliente = emailCliente;
-    //     this.conteudo = conteudo;
-    //     this.dataCriacao = new Date(System.currentTimeMillis());
-    //     this.dataEdicao = new Date(System.currentTimeMillis());
-    // }
-
     // Novo labirinto (editor)
+    /**
+     * Construct utilizado quando é criado um novo labirinto 
+     * @param emailCliente email no qual foi armazenado o novo labirinto 
+     */
     public Labirinto (String emailCliente) {
         this.dataCriacao = new Date(System.currentTimeMillis());
         this.dataEdicao = new Date(System.currentTimeMillis());
         this.emailCliente = emailCliente;
     }
 
-    // Clone
+    /**
+     * Construct utilizado para criar clones de labirintos 
+     * @param clonado é o modelo de labirinto a ser clonado 
+     * @throws Exception
+     */
     public Labirinto (Labirinto clonado) throws Exception
     {
         if (clonado == null) {
